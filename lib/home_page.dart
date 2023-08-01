@@ -26,11 +26,9 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: PageStorage(
-          bucket: bucket,
-          child: currentScreen,
-        ),
+      body: PageStorage(
+        bucket: bucket,
+        child: currentScreen,
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
@@ -167,7 +165,3 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
-          
-          //bottom navigation bar
-        
-
