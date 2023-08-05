@@ -1,0 +1,82 @@
+{
+  "project_info": {
+    "project_number": "463677421958",
+    "project_id": "bellehouse",
+    "storage_bucket": "bellehouse.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:463677421958:android:58367483a61f619c6d1407",
+        "android_client_info": {
+          "package_name": "com.bellehouseniger.bellehouse"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "463677421958-er3e9e97q5hbqg137c1b1fu3klbru9rt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCOY755druLwM5OVnkg7n_lP7fRJXy244A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "463677421958-er3e9e97q5hbqg137c1b1fu3klbru9rt.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "463677421958-7ko21lo6185rq2nk6p5mjhgm55hf7bfb.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.bellehouseniger.bellehouse.RunnerTests"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:463677421958:android:e63b2771c74ee4a66d1407",
+        "android_client_info": {
+          "package_name": "se.pixolity.mynotes"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "463677421958-er3e9e97q5hbqg137c1b1fu3klbru9rt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCOY755druLwM5OVnkg7n_lP7fRJXy244A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "463677421958-er3e9e97q5hbqg137c1b1fu3klbru9rt.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "463677421958-7ko21lo6185rq2nk6p5mjhgm55hf7bfb.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.bellehouseniger.bellehouse.RunnerTests"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

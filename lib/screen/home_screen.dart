@@ -141,7 +141,7 @@ class _HomeState extends State<Home> {
 
             //menu de navigation
             SizedBox(
-                height: 80.0,
+                height: 70.0,
                 child: ListView(
                   padding: const EdgeInsets.all(8.0),
                   scrollDirection: Axis.horizontal,
