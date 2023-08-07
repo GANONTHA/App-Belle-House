@@ -1,6 +1,6 @@
-import 'package:bellehouse/screen/chat_screen.dart';
 import 'package:bellehouse/screen/favorite_screen.dart';
 import 'package:bellehouse/screen/home_screen.dart';
+import 'package:bellehouse/screen/messages.dart';
 import 'package:bellehouse/screen/profile_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -17,7 +17,7 @@ class _MyHomePageState extends State<MyHomePage> {
   final List<Widget> screens = [
     const Home(),
     const Favorites(),
-    const Chat(),
+    const Message(),
     const Profile(),
   ];
   final PageStorageBucket bucket = PageStorageBucket();
@@ -108,7 +108,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     minWidth: 40,
                     onPressed: () {
                       setState(() {
-                        currentScreen = const Chat();
+                        currentScreen = const Message();
                         currentTab = 2;
                       });
                     },
