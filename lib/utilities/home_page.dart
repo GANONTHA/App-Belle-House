@@ -31,6 +31,7 @@ class _MyHomePageState extends State<MyHomePage> {
         child: currentScreen,
       ),
       floatingActionButton: FloatingActionButton(
+        backgroundColor: const Color(0x9E1640D8),
         onPressed: () {},
         child: const Icon(Icons.add),
       ),

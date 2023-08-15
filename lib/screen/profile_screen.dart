@@ -1,8 +1,11 @@
 import 'package:bellehouse/services/auth/auth_service.dart';
 import 'package:bellehouse/utilities/dialogs/logout_dialog.dart';
+import 'package:bellehouse/utilities/home_page.dart';
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:provider/provider.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
+import 'package:geocoding/geocoding.dart';
 
 class Profile extends StatefulWidget {
   const Profile({super.key});
@@ -18,6 +21,8 @@ class _ProfileState extends State<Profile> {
     authService.signOut();
   }
 
+  Position? _currentPosition;
+  String? _currentAddress;
   @override
   Widget build(BuildContext context) {
     var isDark = MediaQuery.of(context).platformBrightness == Brightness.dark;
@@ -25,10 +30,14 @@ class _ProfileState extends State<Profile> {
       appBar: AppBar(
         leading: IconButton(
           onPressed: () {
-            Navigator.of(context).pop();
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => const MyHomePage(),
+              ),
+            );
           },
           icon: const Icon(LineAwesomeIcons.angle_left),
-          color: Color(0xFF6C63FF),
+          color: const Color(0xFF6C63FF),
         ),
         title: const Text("Profile screen"),
         backgroundColor: Colors.white,
@@ -48,7 +57,7 @@ class _ProfileState extends State<Profile> {
             width: 90,
             height: 90,
             child: CircleAvatar(
-              backgroundImage: AssetImage("lib.assets/profile.jpg"),
+              backgroundImage: AssetImage("lib/assets/profile.jpg"),
             ),
           ),
           const SizedBox(height: 20),
@@ -156,11 +165,53 @@ class _ProfileState extends State<Profile> {
                     ],
                   ),
                 ),
+                if (_currentAddress != null)
+                  Text(
+                    // "LAT: ${_currentPosition!.latitude}, LON: ${_currentPosition!.longitude}",
+                    _currentAddress!,
+                  ),
+                TextButton(
+                  onPressed: () {
+                    _getCurrentLocation();
+                    _getAddressFromLatLng();
+                  },
+                  child: const Text("Get location"),
+                )
               ],
             ),
           ),
         ],
       ),
     );
+  }
+
+  _getCurrentLocation() async {
+    await Geolocator.requestPermission();
+    await Geolocator.requestPermission();
+    Geolocator.getCurrentPosition(
+            desiredAccuracy: LocationAccuracy.best,
+            forceAndroidLocationManager: true)
+        .then((Position position) {
+      setState(() {
+        _currentPosition = position;
+      });
+    }).catchError((e) {
+      throw (e.code);
+    });
+  }
+
+  _getAddressFromLatLng() async {
+    try {
+      List<Placemark> placemarks = await placemarkFromCoordinates(
+          _currentPosition!.latitude, _currentPosition!.longitude);
+
+      Placemark place = placemarks[0];
+
+      setState(() {
+        _currentAddress =
+            "${place.locality}, ${place.postalCode}, ${place.country}";
+      });
+      // ignore: empty_catches
+    } catch (e) {}
   }
 }

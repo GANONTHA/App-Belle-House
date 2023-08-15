@@ -61,22 +61,23 @@ class _ChatPageState extends State<ChatPage> {
 
 //build  message list
   Widget _buildMessageList() {
-    return StreamBuilder(
+    return StreamBuilder<QuerySnapshot>(
       stream: _chatService.getMessages(
         widget.receiverUserID,
         _firebaseAuth.currentUser!.uid,
       ),
-      builder: (context, snapshot) {
+      builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
         if (snapshot.hasError) {
           return Text('Error ${snapshot.error.toString()}');
         }
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Text('Loading');
         }
+
+        final List<DocumentSnapshot> documents = snapshot.data!.docs;
         return ListView(
-          children: snapshot.data!.docs
-              .map((document) => _buildMessageItem(document))
-              .toList(),
+          children:
+              documents.map((document) => _buildMessageItem(document)).toList(),
         );
       },
     );

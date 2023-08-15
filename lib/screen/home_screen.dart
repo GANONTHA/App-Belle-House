@@ -3,6 +3,8 @@ import 'package:bellehouse/Menus/meubles.dart';
 import 'package:bellehouse/Menus/parcelles.dart';
 import 'package:bellehouse/Menus/tout.dart';
 import 'package:flutter/material.dart';
+import 'package:geocode/geocode.dart';
+import 'package:location/location.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -32,8 +34,16 @@ class _HomeState extends State<Home> {
   ];
   final PageStorageBucket bucket = PageStorageBucket();
   Widget currentScreen = const Tout();
+//get location
+  // void getLocation() async {
+  //   await Geolocator.checkPermission();
+  //   await Geolocator.requestPermission();
 
-  @override
+  //   Position position = await Geolocator.getCurrentPosition(
+  //     desiredAccuracy: LocationAccuracy.high,
+  //   );
+  // }
+
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
@@ -60,7 +70,7 @@ class _HomeState extends State<Home> {
                                         color: Color(0xA11640D8),
                                       ),
                                       Text(
-                                        'Niamey- Niger',
+                                        "Niamey-Niger",
                                         style: TextStyle(
                                           fontWeight: FontWeight.bold,
                                           fontSize: 17,
@@ -264,4 +274,46 @@ class _HomeState extends State<Home> {
       ),
     );
   }
+}
+
+//get location
+
+Future<LocationData?> _getLocation() async {
+  Location location = Location();
+  LocationData locationData;
+
+  bool serviceEnabled;
+  PermissionStatus permissionGranted;
+
+  serviceEnabled = await location.serviceEnabled();
+
+  if (!serviceEnabled) {
+    serviceEnabled = await location.requestService();
+    if (!serviceEnabled) {
+      return null;
+    }
+  }
+
+  permissionGranted = await location.hasPermission();
+  if (permissionGranted == PermissionStatus.denied) {
+    permissionGranted = await location.requestPermission();
+    if (permissionGranted != PermissionStatus.granted) {
+      return null;
+    }
+  }
+
+  locationData = await location.getLocation();
+
+  return locationData;
+}
+
+//get the address
+
+Future<String> _getAddress(double? lat, double? lang) async {
+  if (lat == null || lang == null) return "";
+  GeoCode geocode = GeoCode();
+
+  Address address =
+      await geocode.reverseGeocoding(latitude: lat, longitude: lang);
+  return " ${address.city}, ${address.countryName}";
 }
