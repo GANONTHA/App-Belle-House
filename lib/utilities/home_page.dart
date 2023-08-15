@@ -1,3 +1,4 @@
+import 'package:bellehouse/model/form/upload_image.dart';
 import 'package:bellehouse/screen/favorite_screen.dart';
 import 'package:bellehouse/screen/home_screen.dart';
 import 'package:bellehouse/screen/messages.dart';
@@ -32,7 +33,14 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: const Color(0x9E1640D8),
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const UploadImage(),
+            ),
+          );
+        },
         child: const Icon(Icons.add),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,

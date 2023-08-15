@@ -44,6 +44,8 @@ dependencies:
   geolocator: ^9.0.2
   geocode: 1.0.1
   location: ^5.0.3
+  firebase_storage: ^11.2.5
+  file_picker: ^5.3.3
 
 dev_dependencies:
   flutter_test:
