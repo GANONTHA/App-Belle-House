@@ -1,5 +1,4 @@
 import 'package:bellehouse/components/chat_bubble.dart';
-import 'package:bellehouse/components/my_text_field.dart';
 import 'package:bellehouse/services/chat/chat_services.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -8,10 +7,12 @@ import 'package:flutter/material.dart';
 class ChatPage extends StatefulWidget {
   final String receiverUserEmail;
   final String receiverUserID;
+  final String receiverName;
   const ChatPage(
       {super.key,
       required this.receiverUserEmail,
-      required this.receiverUserID});
+      required this.receiverUserID,
+      required this.receiverName});
 
   @override
   State<ChatPage> createState() => _ChatPageState();
@@ -28,9 +29,7 @@ class _ChatPageState extends State<ChatPage> {
     if (_messageController.text.isNotEmpty) {
       //make sure there's a message to send
       await _chatService.sendMessage(
-        widget.receiverUserID,
-        _messageController.text,
-      );
+          widget.receiverUserID, _messageController.text, widget.receiverName);
       //clear the message after sending the message
       _messageController.clear();
     }
@@ -40,21 +39,26 @@ class _ChatPageState extends State<ChatPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.receiverUserEmail),
+        backgroundColor: const Color(0xFF6C63FF),
+        title: Text(widget.receiverName),
       ),
-      body: Column(
-        children: [
-          //messages
-          Expanded(
-            child: _buildMessageList(),
-          ),
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            //messages
+            Expanded(
+              child: _buildMessageList(),
+            ),
 
-          //user input
-          _buildMessageInput(),
-          const SizedBox(
-            height: 25.0,
-          ),
-        ],
+            //user input
+            _buildMessageInput(),
+            const SizedBox(
+              height: 25.0,
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -63,21 +67,27 @@ class _ChatPageState extends State<ChatPage> {
   Widget _buildMessageList() {
     return StreamBuilder<QuerySnapshot>(
       stream: _chatService.getMessages(
-        widget.receiverUserID,
-        _firebaseAuth.currentUser!.uid,
-      ),
+          _firebaseAuth.currentUser!.uid, widget.receiverUserID),
       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
         if (snapshot.hasError) {
           return Text('Error ${snapshot.error.toString()}');
         }
-        if (snapshot.connectionState == ConnectionState.waiting) {
+        if (snapshot.connectionState == ConnectionState.waiting ||
+            !snapshot.hasData) {
           return const Text('Loading');
         }
-
-        final List<DocumentSnapshot> documents = snapshot.data!.docs;
-        return ListView(
-          children:
-              documents.map((document) => _buildMessageItem(document)).toList(),
+        if (snapshot.hasData) {
+          final List<DocumentSnapshot> documents = snapshot.data!.docs;
+          return ListView(
+              scrollDirection: Axis.vertical,
+              reverse: true,
+              //addAutomaticKeepAlives: true,
+              children: documents
+                  .map((document) => _buildMessageItem(document))
+                  .toList());
+        }
+        return Container(
+          color: Colors.amber,
         );
       },
     );
@@ -92,6 +102,7 @@ class _ChatPageState extends State<ChatPage> {
         ? Alignment.centerRight
         : Alignment.centerLeft;
     return Container(
+      // height: 100,
       alignment: alignment,
       child: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -107,7 +118,12 @@ class _ChatPageState extends State<ChatPage> {
           children: [
             Text(data['senderEmail']),
             const SizedBox(height: 5.0),
-            ChatBubble(message: data['message']),
+            ChatBubble(
+              message: data['message'],
+              color: (data['senderId'] == _firebaseAuth.currentUser!.uid)
+                  ? const Color(0xFF6C63FF)
+                  : Colors.blueGrey,
+            ),
           ],
         ),
       ),
@@ -117,14 +133,24 @@ class _ChatPageState extends State<ChatPage> {
 //buiild a message Input
   Widget _buildMessageInput() {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 25.0),
+      padding: const EdgeInsets.symmetric(horizontal: 10.0),
       child: Row(
         children: [
           //text field
           Expanded(
-            child: MyTextField(
+            child: TextField(
               controller: _messageController,
-              hintText: 'Ecrivez votre message ici',
+              autofocus: true,
+              decoration: InputDecoration(
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12.0),
+                  borderSide: BorderSide(color: Colors.grey.shade100),
+                ),
+                fillColor: Colors.grey[300],
+                filled: true,
+                hintStyle: TextStyle(color: Colors.grey[500]),
+                hintText: 'Ecrivez votre message',
+              ),
               obscureText: false,
             ),
           ),
@@ -133,8 +159,9 @@ class _ChatPageState extends State<ChatPage> {
           IconButton(
             onPressed: sendMessage,
             icon: const Icon(
-              Icons.arrow_upward,
+              Icons.send,
               size: 40,
+              color: Color(0xFF6C63FF),
             ),
           )
         ],

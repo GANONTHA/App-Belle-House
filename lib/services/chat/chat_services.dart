@@ -9,7 +9,8 @@ class ChatService extends ChangeNotifier {
   final FirebaseFirestore _fireStore = FirebaseFirestore.instance;
 
   //SEND MESSAGES
-  Future<void> sendMessage(String receiverId, String message) async {
+  Future<void> sendMessage(
+      String receiverId, String message, String receiverName) async {
     //get the current user info
     final String currentUserId = _firebaseAuth.currentUser!.uid;
 
@@ -23,11 +24,12 @@ class ChatService extends ChangeNotifier {
       receiverId: receiverId,
       timestamp: timestamp,
       message: message,
+      name: receiverName,
     );
     //construct chat room id from current user id and receiver id (sorted to ensure uniqueness)
     List<String> ids = [receiverId, currentUserId];
     ids.sort(); //sort the ids (this ensures the chat room id is always the same for any pair of users)
-    String chatRoomId = ids.join("_");
+    String chatRoomId = ids.join('_');
     //add new message to the database
     await _fireStore
         .collection('chat_rooms')
@@ -39,14 +41,16 @@ class ChatService extends ChangeNotifier {
   //GET MESSAGES
   Stream<QuerySnapshot> getMessages(String userId, String otherUserId) {
     //construct chat room id from user ids (sorted to ensure it matches the id used when sending mesages)
+
     List<String> ids = [userId, otherUserId];
     ids.sort();
-    String chatRoomId = ids.join("_");
+    String chatRoomId = ids.join('_');
+
     return _fireStore
         .collection('chat_rooms')
         .doc(chatRoomId)
         .collection('messages')
-        .orderBy('timestamp', descending: false)
+        .orderBy('TimeStamp', descending: true)
         .snapshots();
   }
 }

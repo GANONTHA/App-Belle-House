@@ -46,6 +46,8 @@ dependencies:
   location: ^5.0.3
   firebase_storage: ^11.2.5
   file_picker: ^5.3.3
+  get: ^4.6.5
+  shared_preferences: ^2.2.0
 
 dev_dependencies:
   flutter_test:

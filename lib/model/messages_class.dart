@@ -6,6 +6,7 @@ class AMessage {
   final String receiverId;
   final Timestamp timestamp;
   final String message;
+  final String name;
 
   AMessage({
     required this.senderId,
@@ -13,6 +14,7 @@ class AMessage {
     required this.receiverId,
     required this.timestamp,
     required this.message,
+    required this.name,
   });
 
   //convert to Map (because infos are stored in Firebase in Map format)
@@ -23,7 +25,8 @@ class AMessage {
       'senderEmail': senderEmail,
       'receiverId': receiverId,
       'TimeStamp': timestamp,
-      'message': message
+      'message': message,
+      'name': name,
     };
   }
 }

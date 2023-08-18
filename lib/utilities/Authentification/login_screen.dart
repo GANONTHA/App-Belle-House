@@ -17,6 +17,7 @@ class _LoginPageState extends State<LoginPage> {
   //text controller
   final emaiController = TextEditingController();
   final passwordControler = TextEditingController();
+  final nameController = TextEditingController();
 
   //method
   void logIn() async {
@@ -62,8 +63,18 @@ class _LoginPageState extends State<LoginPage> {
               //welcome back message
 
               //email textfield
-              MyTextField(
-                hintText: 'Addresse email',
+              TextField(
+                autofocus: true,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: BorderSide(color: Colors.grey.shade100),
+                  ),
+                  fillColor: Colors.grey[300],
+                  filled: true,
+                  hintStyle: TextStyle(color: Colors.grey[500]),
+                  hintText: 'Addresse email',
+                ),
                 obscureText: false,
                 controller: emaiController,
               ),
@@ -73,9 +84,10 @@ class _LoginPageState extends State<LoginPage> {
               ),
               //password textfield
               MyTextField(
-                hintText: 'Creez votre mot de passe',
+                hintText: 'Entrez votre mot de passe',
                 obscureText: true,
                 controller: passwordControler,
+                focus: false,
               ),
               const SizedBox(
                 height: 40,

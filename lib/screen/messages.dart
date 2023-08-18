@@ -17,6 +17,7 @@ class _MessageState extends State<Message> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: const Color(0xFF6C63FF),
         title: const Text("Messages"),
       ),
       body: _buildUserList(),
@@ -35,6 +36,7 @@ class _MessageState extends State<Message> {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const CircularProgressIndicator();
         }
+
         return Container(
           height: 100,
           child: ListView(
@@ -50,10 +52,22 @@ class _MessageState extends State<Message> {
 //build individual user list items
   Widget _buildUserListItem(DocumentSnapshot document) {
     Map<String, dynamic> data = document.data()! as Map<String, dynamic>;
+
     //diaplay all users except current user
     if (_auth.currentUser!.email != data['email']) {
       return ListTile(
-        title: Text(data['email']),
+        title: Container(
+          height: 40,
+          color: Colors.grey.shade300,
+          child: Padding(
+            padding: const EdgeInsets.only(left: 8.0, top: 8.0),
+            child: Text(
+              data['name'],
+              style: const TextStyle(
+                  fontWeight: FontWeight.bold, letterSpacing: 1.3),
+            ),
+          ),
+        ),
         onTap: () {
           //pass the clicked user's UID to the chat page
           Navigator.push(
@@ -62,6 +76,7 @@ class _MessageState extends State<Message> {
               builder: (context) => ChatPage(
                 receiverUserEmail: data['email'],
                 receiverUserID: data['uid'],
+                receiverName: data['name'],
               ),
             ),
           );

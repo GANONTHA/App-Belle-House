@@ -1,12 +1,17 @@
 import 'package:bellehouse/components/my_text_field.dart';
 import 'package:bellehouse/services/auth/auth_service.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import '../../components/my_Button.dart';
 
 class RegisterPage extends StatefulWidget {
   final void Function()? onTap;
-  RegisterPage({super.key, required this.onTap});
+
+  RegisterPage({
+    super.key,
+    required this.onTap,
+  });
 
   @override
   State<RegisterPage> createState() => _RegisterPageState();
@@ -17,7 +22,6 @@ class _RegisterPageState extends State<RegisterPage> {
   final emaiController = TextEditingController();
 
   final passwordControler = TextEditingController();
-
   final nameController = TextEditingController();
 
   final confirmPasswordController = TextEditingController();
@@ -36,7 +40,7 @@ class _RegisterPageState extends State<RegisterPage> {
     final authService = Provider.of<AuthService>(context, listen: false);
     try {
       await authService.signUpWithEmailAndPassword(
-          emaiController.text, passwordControler.text);
+          emaiController.text, passwordControler.text, nameController.text);
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
@@ -44,6 +48,11 @@ class _RegisterPageState extends State<RegisterPage> {
         ),
       );
     }
+  }
+
+//handle error
+  handleError(PlatformException error) {
+    switch (error.code) {}
   }
 
   @override
@@ -83,6 +92,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 hintText: 'Entrer votre Nom et Prenom',
                 obscureText: false,
                 controller: nameController,
+                focus: true,
               ),
               const SizedBox(
                 height: 10.0,
@@ -93,6 +103,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 hintText: 'Entrer un mot de passe',
                 obscureText: true,
                 controller: passwordControler,
+                focus: false,
               ),
               const SizedBox(
                 height: 10.0,
@@ -102,6 +113,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 hintText: 'confirmer le mot de passe',
                 obscureText: true,
                 controller: confirmPasswordController,
+                focus: false,
               ),
               const SizedBox(
                 height: 10.0,
@@ -111,6 +123,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 hintText: 'Entrer votre numero de telephone ou email',
                 obscureText: false,
                 controller: emaiController,
+                focus: false,
               ),
               const SizedBox(
                 height: 20.0,
