@@ -12,24 +12,25 @@ class _AddItemsState extends State<AddItems> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: const Text("Add new items"),
-        ),
-        body: Column(
-          children: [
-            const Text("Adding new items page"),
-            TextButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const UploadImage(),
-                  ),
-                );
-              },
-              child: const Text('Add image'),
-            )
-          ],
-        ));
+      appBar: AppBar(
+        title: const Text("Add new items"),
+      ),
+      body: Column(
+        children: [
+          const Text("Adding new items page"),
+          TextButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const UploadImage(),
+                ),
+              );
+            },
+            child: const Text('Add image'),
+          )
+        ],
+      ),
+    );
   }
 }

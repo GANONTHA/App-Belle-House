@@ -37,7 +37,7 @@ class _MessageState extends State<Message> {
           return const CircularProgressIndicator();
         }
 
-        return Container(
+        return SizedBox(
           height: 100,
           child: ListView(
             children: snapshot.data!.docs
