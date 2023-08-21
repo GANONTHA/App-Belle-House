@@ -27,7 +27,7 @@ class PropertyService extends ChangeNotifier {
     String agentEmail,
   ) async {
     //get user's infos
-    final String currentUserId = _firebaseAuth.currentUser!.uid;
+
     final String agentEmail = _firebaseAuth.currentUser!.email.toString();
     final Timestamp timeStamp = Timestamp.now();
 //create a new house post
@@ -49,19 +49,12 @@ class PropertyService extends ChangeNotifier {
       agentEmail: agentEmail,
     );
 
-    String propertyId = currentUserId;
-    await _fireStore
-        .collection('properties')
-        .doc(propertyId)
-        .collection('houses')
-        .add(newHouse.toMap());
+    await _fireStore.collection('houses').add(newHouse.toMap());
   }
 
   //GET HOUSE
-  Stream<QuerySnapshot> getHouse(String userId) {
+  Stream<QuerySnapshot> getHouse() {
     return _fireStore
-        .collection('properties')
-        .doc(userId)
         .collection('houses')
         .orderBy('timeStamp', descending: false)
         .snapshots();

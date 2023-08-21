@@ -1,6 +1,5 @@
 import 'package:bellehouse/services/storage/property_services.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 
@@ -13,7 +12,7 @@ class HousesDetails extends StatefulWidget {
 
 class _HousesDetailsState extends State<HousesDetails> {
   final PropertyService _propertyService = PropertyService();
-  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+
   List<bool> likes = [false, true];
   bool isLiked = false;
   @override
@@ -95,7 +94,7 @@ class _HousesDetailsState extends State<HousesDetails> {
 //Post's image
   Widget _buildPropertyImagesList() {
     return StreamBuilder<QuerySnapshot>(
-        stream: _propertyService.getHouse(_firebaseAuth.currentUser!.uid),
+        stream: _propertyService.getHouse(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (snapshot.hasError) {
             return Text("Error: ${snapshot.error.toString()}");
@@ -125,7 +124,7 @@ class _HousesDetailsState extends State<HousesDetails> {
 
   Widget _buildPropertyDetails() {
     return StreamBuilder<QuerySnapshot>(
-        stream: _propertyService.getHouse(_firebaseAuth.currentUser!.uid),
+        stream: _propertyService.getHouse(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (snapshot.hasError) {
             return Text("Error: ${snapshot.error.toString()}");
