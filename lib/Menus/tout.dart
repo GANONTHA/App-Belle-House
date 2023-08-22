@@ -1,4 +1,3 @@
-import 'package:bellehouse/screen/property_details/details_for_houses.dart';
 import 'package:bellehouse/utilities/menu_sources/most_popular.dart';
 import 'package:bellehouse/utilities/menu_sources/near_you.dart';
 import 'package:flutter/material.dart';
@@ -83,31 +82,22 @@ class _ToutState extends State<Tout> {
               itemBuilder: (context, index) {
                 return Padding(
                   padding: const EdgeInsets.all(6.0),
-                  child: GestureDetector(
-                    onTap: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => const HousesDetails(),
-                        ),
-                      );
-                    },
-                    child: Container(
-                      width: 350,
-                      color: const Color(0xFFD9D9D9),
-                      child: Popular(
-                        postImage: populaire[index][0],
-                        city: populaire[index][1],
-                        rating: populaire[index][02],
-                        type: populaire[index][3],
-                        contractType: populaire[index][4],
-                        price: populaire[index][5],
-                        area: populaire[index][6],
-                        bedrooms: populaire[index][7],
-                        bathrooms: populaire[index][8],
-                        size: populaire[index][9],
-                        agentName: populaire[index][10],
-                        agentPhoto: populaire[index][11],
-                      ),
+                  child: Container(
+                    width: 350,
+                    color: const Color(0xFFD9D9D9),
+                    child: Popular(
+                      postImage: populaire[index][0],
+                      city: populaire[index][1],
+                      rating: populaire[index][02],
+                      type: populaire[index][3],
+                      contractType: populaire[index][4],
+                      price: populaire[index][5],
+                      area: populaire[index][6],
+                      bedrooms: populaire[index][7],
+                      bathrooms: populaire[index][8],
+                      size: populaire[index][9],
+                      agentName: populaire[index][10],
+                      agentPhoto: populaire[index][11],
                     ),
                   ),
                 );

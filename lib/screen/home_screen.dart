@@ -156,7 +156,7 @@ class _HomeState extends State<Home> {
                                   'lib/assets/filter.png',
                                   color: Colors.white,
                                 ),
-                              )
+                              ),
                             ],
                           ),
                         ),
@@ -183,7 +183,8 @@ class _HomeState extends State<Home> {
                             currentScreen = const Tout();
                           });
                         },
-                        style: TextButton.styleFrom(
+                        style: ElevatedButton.styleFrom(
+                            elevation: 2,
                             backgroundColor: currentTab == 0
                                 ? colorCodes[0]
                                 : colorCodes[1]),
@@ -207,7 +208,8 @@ class _HomeState extends State<Home> {
                             currentScreen = const Maison();
                           });
                         },
-                        style: TextButton.styleFrom(
+                        style: ElevatedButton.styleFrom(
+                            elevation: 2,
                             backgroundColor: currentTab == 1
                                 ? colorCodes[0]
                                 : colorCodes[1]),
@@ -232,7 +234,8 @@ class _HomeState extends State<Home> {
                             currentScreen = const Parcelle();
                           });
                         },
-                        style: TextButton.styleFrom(
+                        style: ElevatedButton.styleFrom(
+                            elevation: 2,
                             backgroundColor: currentTab == 2
                                 ? colorCodes[0]
                                 : colorCodes[1]),
@@ -257,7 +260,8 @@ class _HomeState extends State<Home> {
                             currentScreen = const Meuble();
                           });
                         },
-                        style: TextButton.styleFrom(
+                        style: ElevatedButton.styleFrom(
+                            elevation: 2,
                             backgroundColor: currentTab == 3
                                 ? colorCodes[0]
                                 : colorCodes[1]),

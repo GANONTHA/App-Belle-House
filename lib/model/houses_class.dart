@@ -15,7 +15,9 @@ class Property {
   final String agentPhoto;
   final String agentEmail;
   final Timestamp timeStamp;
-  Property({
+  final int view;
+  Property(
+    this.view, {
     required this.postImage,
     required this.city,
     required this.rating,
@@ -48,6 +50,7 @@ class Property {
       'agentName': agentName,
       'agentPhoto': agentPhoto,
       'timeStamp': timeStamp,
+      'view': view,
       'agentEmail': agentEmail,
     };
   }

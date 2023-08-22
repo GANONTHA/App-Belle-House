@@ -11,6 +11,7 @@ class HousesDetails extends StatefulWidget {
 }
 
 class _HousesDetailsState extends State<HousesDetails> {
+  //grab instance of the property
   final PropertyService _propertyService = PropertyService();
 
   List<bool> likes = [false, true];

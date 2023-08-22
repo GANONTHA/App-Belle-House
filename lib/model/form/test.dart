@@ -26,9 +26,21 @@ class _TestState extends State<Test> {
     200.0,
     'Belle House',
     'lib/assets/profile.jpg',
-    'agent@gmail.com'
+    'agent@gmail.com',
+    12,
   ];
-
+  final List meubles = [
+    //[propretyImage, name, sellerName, location, price],
+    'lib/assets/table.jpg', 'Table', 'Boutique Bazar', 'Niamey', 20000.0,
+    // ['lib/assets/sofa.jpg', 'Sofa', 'Belle House', 'Niamey', 30000.0],
+    // ['lib/assets/bed.jpg', 'Lit deux place', 'Belle House', 'Zinder', 10000.0],
+  ];
+  final List parcelles = [
+    //[postimage, type, size, location, price, view]
+    'lib/assets/land_one.jpg', 'ETAGE', 250.0, 'Francophonie', 200000.0, 09,
+    // ['lib/assets/land_two.jpg', 'VILLA', 150.0, 'Plateau', 10000.0, 03],
+    // ['lib/assets/land_three.jpg', 'Parcelle', 200.0, 'Danzama', 400000.0, 03],
+  ];
   //upoad house
   void postHouse() async {
     await _propertyService.uploadHouse(
@@ -45,7 +57,23 @@ class _TestState extends State<Test> {
       houses[10],
       houses[11],
       houses[12],
+      houses[13],
     );
+  }
+
+  void postMeuble() async {
+    await _propertyService.uploadMeuble(
+      meubles[0],
+      meubles[1],
+      meubles[4],
+      meubles[2],
+      meubles[3],
+    );
+  }
+
+  void postParcelle() async {
+    await _propertyService.uploadLand(parcelles[0], parcelles[3], parcelles[2],
+        parcelles[5], parcelles[4], parcelles[1]);
   }
 
   @override
@@ -57,7 +85,7 @@ class _TestState extends State<Test> {
           Expanded(
               flex: 1,
               child: TextButton(
-                  onPressed: postHouse, child: const Text('click me'))),
+                  onPressed: postParcelle, child: const Text('click me'))),
           Expanded(flex: 2, child: _buildPostList()),
         ],
       ),

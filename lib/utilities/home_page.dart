@@ -56,6 +56,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   MaterialButton(
+                    elevation: 2,
                     minWidth: 40,
                     onPressed: () {
                       setState(() {
@@ -82,6 +83,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                   ),
                   MaterialButton(
+                    elevation: 2,
                     minWidth: 40,
                     onPressed: () {
                       setState(() {
@@ -114,6 +116,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   MaterialButton(
+                    elevation: 2,
                     minWidth: 40,
                     onPressed: () {
                       setState(() {
@@ -140,6 +143,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                   ),
                   MaterialButton(
+                    elevation: 2,
                     minWidth: 40,
                     onPressed: () {
                       setState(() {

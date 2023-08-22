@@ -25,6 +25,7 @@ class PropertyService extends ChangeNotifier {
     String agentName,
     String agentPhoto,
     String agentEmail,
+    int view,
   ) async {
     //get user's infos
 
@@ -33,21 +34,21 @@ class PropertyService extends ChangeNotifier {
 //create a new house post
 
     Property newHouse = Property(
-      postImage: postImage,
-      city: city,
-      rating: rating,
-      type: type,
-      contractType: contractType,
-      price: price,
-      area: area,
-      bedrooms: bedrooms,
-      bathrooms: bathrooms,
-      size: size,
-      agentName: agentName,
-      agentPhoto: agentPhoto,
-      timeStamp: timeStamp,
-      agentEmail: agentEmail,
-    );
+        postImage: postImage,
+        city: city,
+        rating: rating,
+        type: type,
+        contractType: contractType,
+        price: price,
+        area: area,
+        bedrooms: bedrooms,
+        bathrooms: bathrooms,
+        size: size,
+        agentName: agentName,
+        agentPhoto: agentPhoto,
+        timeStamp: timeStamp,
+        agentEmail: agentEmail,
+        view);
 
     await _fireStore.collection('houses').add(newHouse.toMap());
   }
@@ -69,7 +70,7 @@ class PropertyService extends ChangeNotifier {
     String location,
   ) async {
     //get user's infos
-    final String currentUserId = _firebaseAuth.currentUser!.uid;
+
     final Timestamp timeStamp = Timestamp.now();
     //create a new meuble post
 
@@ -81,18 +82,12 @@ class PropertyService extends ChangeNotifier {
       location: location,
       price: price,
     );
-    await _fireStore
-        .collection('properties')
-        .doc(currentUserId)
-        .collection('furnitures')
-        .add(newFurniture.toMap());
+    await _fireStore.collection('furnitures').add(newFurniture.toMap());
   }
 
   //GET FURNITURES
-  Stream<QuerySnapshot> getMeuble(String userId) {
+  Stream<QuerySnapshot> getMeuble() {
     return _fireStore
-        .collection('properties')
-        .doc(userId)
         .collection('furnitures')
         .orderBy('timeStamp', descending: false)
         .snapshots();
@@ -105,8 +100,8 @@ class PropertyService extends ChangeNotifier {
     double size,
     int views,
     double price,
+    String type,
   ) async {
-    final String currentUserId = _firebaseAuth.currentUser!.uid;
     final Timestamp timeStamp = Timestamp.now();
 
     Lands newLand = Lands(
@@ -116,19 +111,14 @@ class PropertyService extends ChangeNotifier {
       price: price,
       size: size,
       views: views,
+      type: type,
     );
-    await _fireStore
-        .collection('properties')
-        .doc(currentUserId)
-        .collection('lands')
-        .add(newLand.toMap());
+    await _fireStore.collection('lands').add(newLand.toMap());
   }
 //GET LANDS
 
-  Stream<QuerySnapshot> getLand(String userId) {
+  Stream<QuerySnapshot> getLand() {
     return _fireStore
-        .collection('properties')
-        .doc(userId)
         .collection('lands')
         .orderBy('timeStamp', descending: false)
         .snapshots();
