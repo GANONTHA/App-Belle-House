@@ -14,24 +14,26 @@ class _TestState extends State<Test> {
 
   //exemple
   final List houses = [
-    'lib/assets/post_one.jpg',
+    'lib/assets/post_three.jpg',
     'Niamey',
-    2.2,
+    4.2,
     'VILLA',
     'A LOUER',
-    50000.0,
-    'KOIRA KANO',
+    100000.0,
+    'FRANCOPHONIE',
+    06,
     04,
-    02,
     200.0,
     'Belle House',
     'lib/assets/profile.jpg',
     'agent@gmail.com',
-    12,
+    03,
+    'neuf'
   ];
   final List meubles = [
     //[propretyImage, name, sellerName, location, price],
-    'lib/assets/table.jpg', 'Table', 'Boutique Bazar', 'Niamey', 20000.0,
+    'lib/assets/table.jpg', 'Table', 'Boutique Bazar', 'Niameyze', 20000.0,
+    'La table en bois de taille normale, ideal pour les salles de reunion ou les salles de classe'
     // ['lib/assets/sofa.jpg', 'Sofa', 'Belle House', 'Niamey', 30000.0],
     // ['lib/assets/bed.jpg', 'Lit deux place', 'Belle House', 'Zinder', 10000.0],
   ];
@@ -57,6 +59,11 @@ class _TestState extends State<Test> {
       houses[10],
       houses[11],
       houses[12],
+      true,
+      true,
+      true,
+      true,
+      'neuf',
       houses[13],
     );
   }
@@ -68,6 +75,7 @@ class _TestState extends State<Test> {
       meubles[4],
       meubles[2],
       meubles[3],
+      meubles[5],
     );
   }
 
@@ -85,7 +93,7 @@ class _TestState extends State<Test> {
           Expanded(
               flex: 1,
               child: TextButton(
-                  onPressed: postParcelle, child: const Text('click me'))),
+                  onPressed: postHouse, child: const Text('click me'))),
           Expanded(flex: 2, child: _buildPostList()),
         ],
       ),
@@ -116,7 +124,7 @@ class _TestState extends State<Test> {
 
   Widget _buildPostItem(DocumentSnapshot document) {
     Map<String, dynamic> data = document.data() as Map<String, dynamic>;
-    print(data);
+
     return Container(
       height: 200,
       child: Column(

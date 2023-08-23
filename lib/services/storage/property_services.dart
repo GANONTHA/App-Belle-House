@@ -25,6 +25,11 @@ class PropertyService extends ChangeNotifier {
     String agentName,
     String agentPhoto,
     String agentEmail,
+    bool diningroom,
+    bool annexe,
+    bool cuisine,
+    bool meublee,
+    String etatDeMaison,
     int view,
   ) async {
     //get user's infos
@@ -34,21 +39,27 @@ class PropertyService extends ChangeNotifier {
 //create a new house post
 
     Property newHouse = Property(
-        postImage: postImage,
-        city: city,
-        rating: rating,
-        type: type,
-        contractType: contractType,
-        price: price,
-        area: area,
-        bedrooms: bedrooms,
-        bathrooms: bathrooms,
-        size: size,
-        agentName: agentName,
-        agentPhoto: agentPhoto,
-        timeStamp: timeStamp,
-        agentEmail: agentEmail,
-        view);
+      postImage: postImage,
+      city: city,
+      rating: rating,
+      type: type,
+      contractType: contractType,
+      price: price,
+      area: area,
+      bedrooms: bedrooms,
+      bathrooms: bathrooms,
+      size: size,
+      agentName: agentName,
+      agentPhoto: agentPhoto,
+      timeStamp: timeStamp,
+      agentEmail: agentEmail,
+      view,
+      annexe: annexe,
+      cuisine: cuisine,
+      diningroom: diningroom,
+      meublee: meublee,
+      etatDeMaison: etatDeMaison,
+    );
 
     await _fireStore.collection('houses').add(newHouse.toMap());
   }
@@ -68,20 +79,24 @@ class PropertyService extends ChangeNotifier {
     double price,
     String sellerName,
     String location,
+    String description,
   ) async {
     //get user's infos
 
     final Timestamp timeStamp = Timestamp.now();
     //create a new meuble post
-
+    final String id = _fireStore.collection('furnitures').doc().id;
     Furnitures newFurniture = Furnitures(
+      description: description,
       timeStamp: timeStamp,
       meubleImage: meubleImage,
       meubleName: meubleName,
       sellerName: sellerName,
       location: location,
       price: price,
+      meubleId: id,
     );
+
     await _fireStore.collection('furnitures').add(newFurniture.toMap());
   }
 
@@ -113,7 +128,9 @@ class PropertyService extends ChangeNotifier {
       views: views,
       type: type,
     );
-    await _fireStore.collection('lands').add(newLand.toMap());
+    await _fireStore.collection('lands').add(
+          newLand.toMap(),
+        );
   }
 //GET LANDS
 

@@ -15,9 +15,19 @@ class Property {
   final String agentPhoto;
   final String agentEmail;
   final Timestamp timeStamp;
+  final bool diningroom;
+  final bool annexe;
+  final bool cuisine;
+  final bool meublee;
+  final String etatDeMaison;
   final int view;
   Property(
     this.view, {
+    required this.diningroom,
+    required this.annexe,
+    required this.cuisine,
+    required this.meublee,
+    required this.etatDeMaison,
     required this.postImage,
     required this.city,
     required this.rating,
@@ -52,6 +62,11 @@ class Property {
       'timeStamp': timeStamp,
       'view': view,
       'agentEmail': agentEmail,
+      'diningroom': diningroom,
+      'annexe': annexe,
+      'cuisine': cuisine,
+      'meublee': meublee,
+      'etatDeMaison': etatDeMaison,
     };
   }
 }
