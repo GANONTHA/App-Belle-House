@@ -95,7 +95,7 @@ class _ParcelleState extends State<Parcelle> {
                         ),
                       ],
                     ),
-                    //bedroom
+                    //size
 
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,

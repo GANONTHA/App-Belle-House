@@ -32,7 +32,7 @@ class _TestState extends State<Test> {
   ];
   final List meubles = [
     //[propretyImage, name, sellerName, location, price],
-    'lib/assets/table.jpg', 'Table', 'Boutique Bazar', 'Niameyze', 20000.0,
+    'lib/assets/sofa.jpg', 'Sofa', 'Baklini', 'Niamey', 50000.0,
     'La table en bois de taille normale, ideal pour les salles de reunion ou les salles de classe'
     // ['lib/assets/sofa.jpg', 'Sofa', 'Belle House', 'Niamey', 30000.0],
     // ['lib/assets/bed.jpg', 'Lit deux place', 'Belle House', 'Zinder', 10000.0],
@@ -93,7 +93,7 @@ class _TestState extends State<Test> {
           Expanded(
               flex: 1,
               child: TextButton(
-                  onPressed: postHouse, child: const Text('click me'))),
+                  onPressed: postMeuble, child: const Text('click me'))),
           Expanded(flex: 2, child: _buildPostList()),
         ],
       ),

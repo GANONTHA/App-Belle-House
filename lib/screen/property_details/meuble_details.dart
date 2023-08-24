@@ -1,4 +1,6 @@
+import 'package:bellehouse/controller/functions/convert_time_to_ago.dart';
 import 'package:bellehouse/model/meuble_class.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 
@@ -8,6 +10,12 @@ class MeubleDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Timestamp date = meuble.timeStamp;
+
+    final String preConverted = "$date";
+    final int seconds = int.parse(preConverted.substring(18, 28));
+    DateTime dateTime = DateTime.fromMillisecondsSinceEpoch(seconds * 1000);
+    String time = convertToAgo(dateTime);
     // print(meuble);
 
     return Scaffold(
@@ -56,11 +64,14 @@ class MeubleDetails extends StatelessWidget {
             style: const TextStyle(
                 fontWeight: FontWeight.bold, letterSpacing: 1.2),
           ),
-          const Padding(
-            padding: EdgeInsets.only(left: 5.0, right: 5.0, top: 5.0),
+          Padding(
+            padding: const EdgeInsets.only(left: 5.0, right: 5.0, top: 5.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [Text("Taille: 2.3 m"), Text("Publie il 2 jours")],
+              children: [
+                const Text("Taille: 2.3 m"),
+                Text("Publie il y a $time")
+              ],
             ),
           ),
           const SizedBox(height: 20),

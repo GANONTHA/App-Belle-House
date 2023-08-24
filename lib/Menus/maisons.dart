@@ -173,7 +173,7 @@ class _MaisonState extends State<Maison> {
                                 color: Color(0xFF6C63FF),
                                 fontWeight: FontWeight.bold,
                                 fontSize: 14.0),
-                          )
+                          ),
                         ],
                       ),
                       //Price and views
@@ -216,7 +216,14 @@ class _MaisonState extends State<Maison> {
                             ],
                           )
                         ],
-                      )
+                      ),
+                      Text(
+                        data['contractType'].toString(),
+                        style: const TextStyle(
+                            color: Color(0xFF6C63FF),
+                            fontWeight: FontWeight.bold,
+                            fontSize: 14.0),
+                      ),
                     ],
                   ),
                 ),

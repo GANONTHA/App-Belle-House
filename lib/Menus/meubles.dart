@@ -65,6 +65,7 @@ class _MeubleState extends State<Meuble> {
     double price = data['price'];
     String sellerName = data['sellerName'];
     String descripiton = data['description'];
+    Timestamp timestamp = data['timeStamp'];
     // var meubleId = data['meubleId'];
 
     String location = data['location'];
@@ -75,13 +76,14 @@ class _MeubleState extends State<Meuble> {
           MaterialPageRoute(
             builder: (context) => MeubleDetails(
               meuble: Furnitures(
-                  timeStamp: Timestamp.now(),
-                  meubleImage: meubleImage,
-                  meubleName: meubleName,
-                  sellerName: sellerName,
-                  location: location,
-                  description: descripiton,
-                  price: price),
+                timeStamp: timestamp,
+                meubleImage: meubleImage,
+                meubleName: meubleName,
+                sellerName: sellerName,
+                location: location,
+                description: descripiton,
+                price: price,
+              ),
             ),
           ),
         );

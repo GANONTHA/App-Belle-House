@@ -1,4 +1,6 @@
+import 'package:bellehouse/controller/functions/convert_time_to_ago.dart';
 import 'package:bellehouse/model/houses_class.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 
@@ -14,6 +16,13 @@ class HousesDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Timestamp date = property.timeStamp;
+    print(date);
+    final String preConverted = "$date";
+    final int seconds = int.parse(preConverted.substring(18, 28));
+    DateTime dateTime = DateTime.fromMillisecondsSinceEpoch(seconds * 1000);
+    print("Il est:  $dateTime");
+    String time = convertToAgo(dateTime);
     return Scaffold(
         appBar: AppBar(
           leading: IconButton(
@@ -44,6 +53,169 @@ class HousesDetails extends StatelessWidget {
           ],
           centerTitle: true,
         ),
-        body: Text(property.city));
+        body: Padding(
+          padding: const EdgeInsets.only(left: 5.0, right: 3.0),
+          child: ListView(
+            children: [
+              Container(
+                height: 300,
+                width: 380,
+                decoration: BoxDecoration(
+                  borderRadius: const BorderRadius.all(Radius.circular(3.0)),
+                  shape: BoxShape.rectangle,
+                  image: DecorationImage(
+                    fit: BoxFit.cover,
+                    image: AssetImage(property.postImage),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 20.0),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "${property.price}",
+                    style: const TextStyle(
+                        fontWeight: FontWeight.bold, fontSize: 20.0),
+                  ),
+                  Container(
+                    height: 20,
+                    width: 65,
+                    decoration: const BoxDecoration(
+                        color: Color(0x9C6C63FF),
+                        borderRadius: BorderRadius.all(Radius.circular(3.0))),
+                    child: Padding(
+                      padding: const EdgeInsets.all(2.0),
+                      child: Text(
+                        property.contractType,
+                        style: const TextStyle(
+                            color: Colors.white, fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 10.0),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Text("Quartier: ${property.area}"),
+                ],
+              ),
+              const Divider(
+                thickness: 0.3,
+                height: 16.0,
+                color: Colors.black,
+              ),
+              const Text(
+                'Proprietes du logement',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(height: 10),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  //first column
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text("Chambres: ${property.bedrooms}",
+                          style: const TextStyle(fontWeight: FontWeight.w700)),
+                      const SizedBox(height: 10.0),
+                      Text("Douches: ${property.bathrooms}",
+                          style: const TextStyle(fontWeight: FontWeight.w700)),
+                      const SizedBox(height: 10.0),
+                      Text("Salle a manger: ${property.diningroom}",
+                          style: const TextStyle(fontWeight: FontWeight.w700)),
+                      const SizedBox(height: 10.0),
+                      Text("Annexe: ${property.annexe}",
+                          style: const TextStyle(fontWeight: FontWeight.w700)),
+                    ],
+                  ),
+                  //second column
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      Text("Superficie: ${property.size}",
+                          style: const TextStyle(fontWeight: FontWeight.w700)),
+                      const SizedBox(height: 10.0),
+                      Text("Cuisine: ${property.cuisine}",
+                          style: const TextStyle(fontWeight: FontWeight.w700)),
+                      const SizedBox(height: 10.0),
+                      Text("Meuble: ${property.meublee}",
+                          style: const TextStyle(fontWeight: FontWeight.w700)),
+                      const SizedBox(height: 10.0),
+                      Text("Etat: ${property.etatDeMaison}",
+                          style: const TextStyle(fontWeight: FontWeight.w700)),
+                    ],
+                  )
+                ],
+              ),
+              const Divider(
+                thickness: .3,
+                height: 16.0,
+                color: Colors.black,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  //time
+                  Column(
+                    children: [const Text("Publiee il y a:"), Text(time)],
+                  ),
+                  //agent's infos
+                  Column(
+                    children: [
+                      Container(
+                        height: 30,
+                        width: 30,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          image: DecorationImage(
+                            image: AssetImage(property.agentPhoto),
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      ),
+                      Text(
+                        property.agentName,
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+              const SizedBox(height: 20.0),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color(0x9C6C63FF)),
+                    onPressed: () {},
+                    child: const Row(
+                      children: [
+                        Text('Message'),
+                        SizedBox(width: 10.0),
+                        Icon(Icons.message)
+                      ],
+                    ),
+                  ),
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color(0x9C6C63FF)),
+                    onPressed: () {},
+                    child: const Row(
+                      children: [
+                        Text('Appellez'),
+                        SizedBox(width: 10.0),
+                        Icon(Icons.call)
+                      ],
+                    ),
+                  )
+                ],
+              )
+            ],
+          ),
+        ));
   }
 }

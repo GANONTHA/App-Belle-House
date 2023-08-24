@@ -50,9 +50,21 @@ class _LoginPageState extends State<LoginPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              //welcome message
+              const Padding(
+                padding: EdgeInsets.only(top: 60.0),
+                child: Text(
+                  'Bienvenu',
+                  style: TextStyle(
+                      fontSize: 25.0,
+                      color: Colors.white,
+                      letterSpacing: 1.4,
+                      fontWeight: FontWeight.bold),
+                ),
+              ),
               //logo
               Padding(
-                padding: const EdgeInsets.only(top: 70.0, left: 40),
+                padding: const EdgeInsets.only(top: .0, left: 40),
                 child: Image.asset(
                   'lib/assets/logo.png',
                   width: 300,
@@ -60,7 +72,6 @@ class _LoginPageState extends State<LoginPage> {
                   color: Colors.blueAccent,
                 ),
               ),
-              //welcome back message
 
               //email textfield
               TextField(
