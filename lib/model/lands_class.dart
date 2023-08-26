@@ -8,14 +8,19 @@ class Lands {
   final String type;
   final int views;
   final Timestamp timeStamp;
-  Lands(
-      {required this.timeStamp,
-      required this.landImage,
-      required this.location,
-      required this.price,
-      required this.size,
-      required this.views,
-      required this.type});
+  final String agentImage;
+  final String agentName;
+  Lands({
+    required this.timeStamp,
+    required this.landImage,
+    required this.location,
+    required this.price,
+    required this.size,
+    required this.views,
+    required this.type,
+    required this.agentImage,
+    required this.agentName,
+  });
   //convert the data to map
   Map<String, dynamic> toMap() {
     return {
@@ -26,6 +31,8 @@ class Lands {
       'views': views,
       'timeStamp': timeStamp,
       'type': type,
+      'agentImage': agentImage,
+      'agentName': agentName,
     };
   }
 }

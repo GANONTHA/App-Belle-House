@@ -40,6 +40,8 @@ class _TestState extends State<Test> {
   final List parcelles = [
     //[postimage, type, size, location, price, view]
     'lib/assets/land_one.jpg', 'ETAGE', 250.0, 'Francophonie', 200000.0, 09,
+    'Belle House',
+    'lib/assets/profile.jpg',
     // ['lib/assets/land_two.jpg', 'VILLA', 150.0, 'Plateau', 10000.0, 03],
     // ['lib/assets/land_three.jpg', 'Parcelle', 200.0, 'Danzama', 400000.0, 03],
   ];
@@ -81,7 +83,7 @@ class _TestState extends State<Test> {
 
   void postParcelle() async {
     await _propertyService.uploadLand(parcelles[0], parcelles[3], parcelles[2],
-        parcelles[5], parcelles[4], parcelles[1]);
+        parcelles[5], parcelles[4], parcelles[1], parcelles[7], parcelles[6]);
   }
 
   @override
@@ -93,7 +95,7 @@ class _TestState extends State<Test> {
           Expanded(
               flex: 1,
               child: TextButton(
-                  onPressed: postMeuble, child: const Text('click me'))),
+                  onPressed: postParcelle, child: const Text('click me'))),
           Expanded(flex: 2, child: _buildPostList()),
         ],
       ),

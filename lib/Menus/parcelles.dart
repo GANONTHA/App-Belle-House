@@ -1,3 +1,5 @@
+import 'package:bellehouse/model/lands_class.dart';
+import 'package:bellehouse/screen/property_details/land_details.dart';
 import 'package:bellehouse/services/storage/property_services.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -52,131 +54,159 @@ class _ParcelleState extends State<Parcelle> {
 
   Widget _buildLandItems(DocumentSnapshot document) {
     Map<String, dynamic> data = document.data() as Map<String, dynamic>;
-
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: SizedBox(
-        height: 200,
-        child: Row(
-          children: [
-            Expanded(
-              flex: 2,
-              child: Container(
-                height: 200,
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage(data['landImage'].toString()),
-                    fit: BoxFit.fill,
+    String landImage = data['landImage'];
+    String location = data['location'];
+    double size = data['size'];
+    double price = data['price'];
+    Timestamp timestamp = data['timeStamp'];
+    int views = data['views'];
+    String type = data['type'];
+    String agentImage = data['agentImage'];
+    String agentName = data['agentName'];
+    return GestureDetector(
+      onTap: () {
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => LandDetails(
+              land: Lands(
+                  timeStamp: timestamp,
+                  landImage: landImage,
+                  location: location,
+                  price: price,
+                  size: size,
+                  views: views,
+                  type: type,
+                  agentImage: agentImage,
+                  agentName: agentName),
+            ),
+          ),
+        );
+      },
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: SizedBox(
+          height: 200,
+          child: Row(
+            children: [
+              Expanded(
+                flex: 2,
+                child: Container(
+                  height: 200,
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage(data['landImage'].toString()),
+                      fit: BoxFit.fill,
+                    ),
                   ),
                 ),
               ),
-            ),
-            Expanded(
-              flex: 3,
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    //Type and like button
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          data['type'].toString(),
-                          style: const TextStyle(
-                              fontSize: 17.0,
-                              fontWeight: FontWeight.bold,
-                              color: Color(0xFF6C63FF)),
-                        ),
-                        const Icon(
-                          Icons.favorite,
-                          color: Color(0xFF6C63FF),
-                        ),
-                      ],
-                    ),
-                    //size
+              Expanded(
+                flex: 3,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      //Type and like button
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            data['type'].toString(),
+                            style: const TextStyle(
+                                fontSize: 17.0,
+                                fontWeight: FontWeight.bold,
+                                color: Color(0xFF6C63FF)),
+                          ),
+                          const Icon(
+                            Icons.favorite,
+                            color: Color(0xFF6C63FF),
+                          ),
+                        ],
+                      ),
+                      //size
 
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        const Icon(
-                          Icons.area_chart,
-                          color: Color(0xFF6C63FF),
-                          size: 24.0,
-                        ),
-                        Text(
-                          '${data['size']} m2',
-                          style: const TextStyle(color: Color(0xFF6C63FF)),
-                        ),
-                      ],
-                    ),
-                    //Location
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        const Icon(
-                          Icons.location_on,
-                          size: 24.0,
-                          color: Color(0xFF6C63FF),
-                        ),
-                        Text(
-                          data['location'].toString(),
-                          style: const TextStyle(
-                              color: Color(0xFF6C63FF),
-                              fontWeight: FontWeight.bold,
-                              fontSize: 14.0),
-                        )
-                      ],
-                    ),
-                    //Price and views
-
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        //price
-                        Row(
-                          children: [
-                            const Icon(
-                              Icons.money,
-                              color: Color(0xFF6C63FF),
-                              size: 24.0,
-                            ),
-                            Text(
-                              data['price'].toString(),
-                              style: const TextStyle(
-                                  color: Color(0xFF6C63FF),
-                                  fontSize: 14.0,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                          ],
-                        ),
-                        //VIEWS
-
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            const Icon(
-                              Icons.visibility,
-                              color: Color(0xFF6C63FF),
-                              size: 24.0,
-                            ),
-                            Text(
-                              "${data['view']} vues",
-                              style: const TextStyle(
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          const Icon(
+                            Icons.area_chart,
+                            color: Color(0xFF6C63FF),
+                            size: 24.0,
+                          ),
+                          Text(
+                            '${data['size']} m2',
+                            style: const TextStyle(color: Color(0xFF6C63FF)),
+                          ),
+                        ],
+                      ),
+                      //Location
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          const Icon(
+                            Icons.location_on,
+                            size: 24.0,
+                            color: Color(0xFF6C63FF),
+                          ),
+                          Text(
+                            data['location'].toString(),
+                            style: const TextStyle(
                                 color: Color(0xFF6C63FF),
-                                fontSize: 12.0,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 14.0),
+                          )
+                        ],
+                      ),
+                      //Price and views
+
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          //price
+                          Row(
+                            children: [
+                              const Icon(
+                                Icons.money,
+                                color: Color(0xFF6C63FF),
+                                size: 24.0,
                               ),
-                            )
-                          ],
-                        ),
-                      ],
-                    ),
-                  ],
+                              Text(
+                                data['price'].toString(),
+                                style: const TextStyle(
+                                    color: Color(0xFF6C63FF),
+                                    fontSize: 14.0,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ],
+                          ),
+                          //VIEWS
+
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              const Icon(
+                                Icons.visibility,
+                                color: Color(0xFF6C63FF),
+                                size: 24.0,
+                              ),
+                              Text(
+                                "${data['views']} vues",
+                                style: const TextStyle(
+                                  color: Color(0xFF6C63FF),
+                                  fontSize: 12.0,
+                                ),
+                              )
+                            ],
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

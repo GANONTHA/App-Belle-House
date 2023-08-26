@@ -116,6 +116,8 @@ class PropertyService extends ChangeNotifier {
     int views,
     double price,
     String type,
+    String agentImage,
+    String agentName,
   ) async {
     final Timestamp timeStamp = Timestamp.now();
 
@@ -127,6 +129,8 @@ class PropertyService extends ChangeNotifier {
       size: size,
       views: views,
       type: type,
+      agentImage: agentImage,
+      agentName: agentName,
     );
     await _fireStore.collection('lands').add(
           newLand.toMap(),

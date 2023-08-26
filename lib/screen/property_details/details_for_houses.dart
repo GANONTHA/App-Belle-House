@@ -17,11 +17,11 @@ class HousesDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Timestamp date = property.timeStamp;
-    print(date);
+
     final String preConverted = "$date";
     final int seconds = int.parse(preConverted.substring(18, 28));
     DateTime dateTime = DateTime.fromMillisecondsSinceEpoch(seconds * 1000);
-    print("Il est:  $dateTime");
+
     String time = convertToAgo(dateTime);
     return Scaffold(
         appBar: AppBar(
