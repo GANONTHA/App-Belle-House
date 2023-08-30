@@ -1,11 +1,11 @@
 import 'package:bellehouse/firebase_options.dart';
+import 'package:bellehouse/screen/welcome/welcome_screen.dart';
+import 'package:bellehouse/services/auth/authProvider.dart';
 import 'package:bellehouse/services/auth/auth_gate.dart';
 import 'package:bellehouse/services/auth/auth_service.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
-import 'model/form/test.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -26,9 +26,12 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: AuthGate(),
+    return MultiProvider(
+      providers: [ChangeNotifierProvider(create: (_) => AuthProvider())],
+      child: const MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: WelcomePage(),
+      ),
     );
   }
 }

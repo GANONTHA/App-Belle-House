@@ -31,7 +31,7 @@ class _MessageState extends State<Message> {
       stream: FirebaseFirestore.instance.collection('users').snapshots(),
       builder: (context, snapshot) {
         if (snapshot.hasError) {
-          return const Text('Error uccured');
+          return const Text('Error occured');
         }
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const CircularProgressIndicator();

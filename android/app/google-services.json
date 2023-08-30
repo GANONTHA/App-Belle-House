@@ -7,12 +7,20 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:463677421958:android:58367483a61f619c6d1407",
+        "mobilesdk_app_id": "1:463677421958:android:d348a1b1864ceaef6d1407",
         "android_client_info": {
           "package_name": "com.bellehouseniger.bellehouse"
         }
       },
       "oauth_client": [
+        {
+          "client_id": "463677421958-91iifv1nvmarun6sgtt5pu2id1p54p2t.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.bellehouseniger.bellehouse",
+            "certificate_hash": "20dc3a9b0944effa238461340c7d013cd7d204c4"
+          }
+        },
         {
           "client_id": "463677421958-er3e9e97q5hbqg137c1b1fu3klbru9rt.apps.googleusercontent.com",
           "client_type": 3

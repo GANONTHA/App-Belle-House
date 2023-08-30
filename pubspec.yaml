@@ -48,6 +48,8 @@ dependencies:
   file_picker: ^5.3.3
   get: ^4.6.5
   shared_preferences: ^2.2.0
+  smooth_page_indicator: ^1.1.0
+  country_picker: ^2.0.20
 
 dev_dependencies:
   flutter_test:

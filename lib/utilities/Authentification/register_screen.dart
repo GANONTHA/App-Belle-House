@@ -1,5 +1,7 @@
 import 'package:bellehouse/components/my_text_field.dart';
+import 'package:bellehouse/services/auth/authProvider.dart';
 import 'package:bellehouse/services/auth/auth_service.dart';
+import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -8,9 +10,10 @@ import '../../components/my_Button.dart';
 class RegisterPage extends StatefulWidget {
   final void Function()? onTap;
 
+  // ignore: prefer_const_constructors_in_immutables
   RegisterPage({
     super.key,
-    required this.onTap,
+    this.onTap,
   });
 
   @override
@@ -20,7 +23,7 @@ class RegisterPage extends StatefulWidget {
 class _RegisterPageState extends State<RegisterPage> {
   //text controller
   final emaiController = TextEditingController();
-
+  final phoneController = TextEditingController();
   final passwordControler = TextEditingController();
   final nameController = TextEditingController();
 
@@ -39,8 +42,8 @@ class _RegisterPageState extends State<RegisterPage> {
     //get the auth service
     final authService = Provider.of<AuthService>(context, listen: false);
     try {
-      await authService.signUpWithEmailAndPassword(
-          emaiController.text, passwordControler.text, nameController.text);
+      await authService.signUpWithEmailAndPassword(emaiController.text,
+          passwordControler.text, nameController.text, phoneController.text);
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
@@ -54,6 +57,19 @@ class _RegisterPageState extends State<RegisterPage> {
   handleError(PlatformException error) {
     switch (error.code) {}
   }
+
+  Country country = Country(
+    phoneCode: '227',
+    countryCode: "NE",
+    e164Sc: 0,
+    geographic: true,
+    level: 1,
+    name: "Niger",
+    example: "Niger",
+    displayName: "Niger",
+    displayNameNoCountryCode: "NE",
+    e164Key: "",
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -118,20 +134,59 @@ class _RegisterPageState extends State<RegisterPage> {
               const SizedBox(
                 height: 10.0,
               ),
-              //email or phone field
+              //email  field
               MyTextField(
-                hintText: 'Entrer votre numero de telephone ou email',
+                hintText: 'Entrer votre addresse email',
                 obscureText: false,
                 controller: emaiController,
                 focus: false,
               ),
               const SizedBox(
+                height: 10.0,
+              ),
+              TextField(
+                obscureText: false,
+                cursorColor: const Color(0xFF6C63FF),
+                controller: phoneController,
+                autofocus: false,
+                decoration: InputDecoration(
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: const BorderSide(color: Colors.black12),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: const BorderSide(color: Colors.black12),
+                  ),
+                  hintText: 'Entrer votre numero de telephone',
+                  prefixIcon: Container(
+                    padding: const EdgeInsets.all(15.0),
+                    child: InkWell(
+                      onTap: () {
+                        showCountryPicker(
+                          context: context,
+                          countryListTheme: const CountryListThemeData(
+                              bottomSheetHeight: 400),
+                          onSelect: (value) {
+                            setState(() {
+                              country = value;
+                            });
+                          },
+                        );
+                      },
+                      child: Text("${country.flagEmoji} +${country.phoneCode}"),
+                    ),
+                  ),
+                  fillColor: Colors.grey[300],
+                  filled: true,
+                ),
+              ),
+              const SizedBox(
                 height: 20.0,
               ),
-
               //button
 
-              MyButton(onTap: singUp, text: 'CREER UN COMPTE'),
+              MyButton(onTap: sendPhoneNumber, text: 'CREER UN COMPTE'),
 
               const SizedBox(
                 height: 20,
@@ -164,5 +219,11 @@ class _RegisterPageState extends State<RegisterPage> {
         ),
       ),
     );
+  }
+
+  void sendPhoneNumber() {
+    final ap = Provider.of<AuthProvider>(context, listen: false);
+    String phoneNumber = phoneController.text.trim();
+    ap.signInWithPhone(context, "+${country.phoneCode}$phoneNumber");
   }
 }

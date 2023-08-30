@@ -1,8 +1,8 @@
 import 'package:bellehouse/services/auth/auth_service.dart';
 import 'package:bellehouse/utilities/dialogs/logout_dialog.dart';
 import 'package:bellehouse/utilities/home_page.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-
 import 'package:provider/provider.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 
@@ -61,6 +61,7 @@ class _ProfileState extends State<Profile> {
           const Text('Alice Johnson'),
           const Text('Numero: +227 88 00 00 00'),
           const SizedBox(height: 20),
+          //   _buildUserInfos(),
           SizedBox(
             width: 200,
             child: ElevatedButton(
@@ -166,6 +167,44 @@ class _ProfileState extends State<Profile> {
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  Widget _buildUserInfos() {
+    return StreamBuilder(
+        stream: FirebaseFirestore.instance.collection('users').snapshots(),
+        builder: (context, snapshot) {
+          if (snapshot.hasError) {
+            return const Text('Error occured');
+          }
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const CircularProgressIndicator();
+          }
+          return Column(
+            children: snapshot.data!.docs
+                .map<Widget>((doc) => _buildUserListItem(doc))
+                .toList(),
+          );
+        });
+  }
+
+//build individual user list items
+  Widget _buildUserListItem(DocumentSnapshot document) {
+    Map<String, dynamic> data = document.data()! as Map<String, dynamic>;
+
+    return ListTile(
+      title: Container(
+        height: 40,
+        color: Colors.grey.shade300,
+        child: Padding(
+          padding: const EdgeInsets.only(left: 8.0, top: 8.0),
+          child: Text(
+            data['name'],
+            style: const TextStyle(
+                fontWeight: FontWeight.bold, letterSpacing: 1.3),
+          ),
+        ),
       ),
     );
   }
