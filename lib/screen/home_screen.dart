@@ -2,9 +2,11 @@ import 'package:bellehouse/Menus/maisons.dart';
 import 'package:bellehouse/Menus/meubles.dart';
 import 'package:bellehouse/Menus/parcelles.dart';
 import 'package:bellehouse/Menus/tout.dart';
+import 'package:bellehouse/services/auth/authProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:provider/provider.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -46,6 +48,7 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
+    final ap = Provider.of<AuthProvider>(context, listen: false);
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -96,9 +99,9 @@ class _HomeState extends State<Home> {
                                   ),
                                 ],
                               ),
-                              const CircleAvatar(
+                              CircleAvatar(
                                 backgroundImage:
-                                    AssetImage('lib/assets/profile.jpg'),
+                                    NetworkImage(ap.userModel!.profilePicture),
                               )
                             ],
                           ),

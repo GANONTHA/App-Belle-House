@@ -59,19 +59,21 @@ class _WelcomePageState extends State<WelcomePage> {
               onLastPage
                   ? GestureDetector(
                       onTap: () {
-                        ap.isSignedIn == true
-                            ? Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => const MyHomePage(),
-                                ),
-                              )
-                            : Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(builder: (context) {
-                                  return RegisterPage();
-                                }),
-                              );
+                        if (ap.isSignedIn == true) {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const MyHomePage(),
+                            ),
+                          );
+                        } else {
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(builder: (context) {
+                              return RegisterPage();
+                            }),
+                          );
+                        }
                       },
                       child: const Text('Terminer'),
                     )

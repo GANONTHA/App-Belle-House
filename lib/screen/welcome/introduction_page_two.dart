@@ -37,7 +37,7 @@ class IntroductionPageTwo extends StatelessWidget {
                   height: 200.0,
                   width: 230,
                   child: Text(
-                    'Trouver une maison qui vous convient sans vous deplacer',
+                    'Decouvrez des parcelles en vente au bout du doigt',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       color: Colors.black,

@@ -1,3 +1,4 @@
+import 'package:bellehouse/services/auth/authProvider.dart';
 import 'package:bellehouse/services/auth/auth_service.dart';
 import 'package:bellehouse/utilities/dialogs/logout_dialog.dart';
 import 'package:bellehouse/utilities/home_page.dart';
@@ -23,6 +24,7 @@ class _ProfileState extends State<Profile> {
   @override
   Widget build(BuildContext context) {
     var isDark = MediaQuery.of(context).platformBrightness == Brightness.dark;
+    final ap = Provider.of<AuthProvider>(context, listen: false);
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -50,16 +52,16 @@ class _ProfileState extends State<Profile> {
       body: Column(
         children: [
           //profile picture
-          const SizedBox(
+          SizedBox(
             width: 90,
             height: 90,
             child: CircleAvatar(
-              backgroundImage: AssetImage("lib/assets/profile.jpg"),
+              backgroundImage: NetworkImage(ap.userModel!.profilePicture),
             ),
           ),
           const SizedBox(height: 20),
-          const Text('Alice Johnson'),
-          const Text('Numero: +227 88 00 00 00'),
+          Text(ap.userModel!.name),
+          Text("Telephone: ${ap.userModel!.phoneNumber}"),
           const SizedBox(height: 20),
           //   _buildUserInfos(),
           SizedBox(

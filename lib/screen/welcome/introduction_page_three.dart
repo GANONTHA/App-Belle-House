@@ -37,7 +37,7 @@ class IntroductionPageThree extends StatelessWidget {
                   height: 200.0,
                   width: 230,
                   child: Text(
-                    'Trouver une maison qui vous convient sans vous deplacer',
+                    'Notifications d\'annonce en temp reel ',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       color: Colors.black,
