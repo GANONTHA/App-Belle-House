@@ -1,16 +1,17 @@
 import 'package:bellehouse/components/chat_bubble.dart';
 import 'package:bellehouse/services/chat/chat_services.dart';
+import 'package:bellehouse/utilities/dialogs/util_functions.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class ChatPage extends StatefulWidget {
-  final String receiverUserEmail;
+  // final String receiverUserEmail;
   final String receiverUserID;
   final String receiverName;
   const ChatPage(
       {super.key,
-      required this.receiverUserEmail,
+      //  required this.receiverUserEmail,
       required this.receiverUserID,
       required this.receiverName});
 
@@ -96,6 +97,9 @@ class _ChatPageState extends State<ChatPage> {
 //build a message item
   Widget _buildMessageItem(DocumentSnapshot document) {
     Map<String, dynamic> data = document.data() as Map<String, dynamic>;
+    Timestamp t = data["TimeStamp"] as Timestamp;
+    DateTime date = t.toDate();
+    String time = displayDateTime(date);
 
     //align the messages to the right if the sender is the current user, otherwise to the left
     var alignment = (data['senderId'] == _firebaseAuth.currentUser!.uid)
@@ -116,7 +120,7 @@ class _ChatPageState extends State<ChatPage> {
                   ? MainAxisAlignment.end
                   : MainAxisAlignment.start,
           children: [
-            Text(data['senderEmail']),
+            Text(time),
             const SizedBox(height: 5.0),
             ChatBubble(
               message: data['message'],

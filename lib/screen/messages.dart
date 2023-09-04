@@ -12,7 +12,7 @@ class Message extends StatefulWidget {
 
 class _MessageState extends State<Message> {
   //instance of auth user
-  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,9 +52,9 @@ class _MessageState extends State<Message> {
 //build individual user list items
   Widget _buildUserListItem(DocumentSnapshot document) {
     Map<String, dynamic> data = document.data()! as Map<String, dynamic>;
-    final currentUserEmail = _auth.currentUser?.email;
+
     //diaplay all users except current user
-    if (currentUserEmail != data['email']) {
+    if (_firebaseAuth.currentUser?.uid != data['uid']) {
       return ListTile(
         title: Container(
           height: 40,
@@ -74,7 +74,7 @@ class _MessageState extends State<Message> {
             context,
             MaterialPageRoute(
               builder: (context) => ChatPage(
-                receiverUserEmail: data['email'],
+                //  receiverUserEmail: data['email'],
                 receiverUserID: data['uid'],
                 receiverName: data['name'],
               ),

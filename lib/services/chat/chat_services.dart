@@ -14,13 +14,13 @@ class ChatService extends ChangeNotifier {
     //get the current user info
     final String currentUserId = _firebaseAuth.currentUser!.uid;
 
-    final String currentUserEmail = _firebaseAuth.currentUser!.email.toString();
+//    final String currentUserEmail = _firebaseAuth.currentUser!.email.toString();
     final Timestamp timestamp = Timestamp.now();
 
     //create a new message
     AMessage newMessage = AMessage(
       senderId: currentUserId,
-      senderEmail: currentUserEmail,
+      //  senderEmail: currentUserEmail,
       receiverId: receiverId,
       timestamp: timestamp,
       message: message,

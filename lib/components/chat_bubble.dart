@@ -8,6 +8,7 @@ class ChatBubble extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      width: 230,
       padding: const EdgeInsets.all(12.0),
       decoration: BoxDecoration(
         borderRadius: const BorderRadius.all(

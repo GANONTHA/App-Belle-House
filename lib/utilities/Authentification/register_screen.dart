@@ -127,7 +127,10 @@ class _RegisterPageState extends State<RegisterPage> {
               ),
               //button
 
-              MyButton(onTap: sendPhoneNumber, text: 'CREER UN COMPTE'),
+              MyButton(
+                onTap: sendPhoneNumber,
+                text: 'CREER UN COMPTE',
+              ),
 
               const SizedBox(
                 height: 20,
