@@ -49,6 +49,7 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     final ap = Provider.of<AuthProvider>(context, listen: false);
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -114,50 +115,71 @@ class _HomeState extends State<Home> {
                             children: [
                               Container(
                                 decoration: BoxDecoration(
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.grey.withOpacity(0.2),
+                                      blurRadius: 3,
+                                      spreadRadius: 2,
+                                      offset: const Offset(0, 3),
+                                    )
+                                  ],
                                   color: const Color(0xFFEEEEEE),
                                   border: Border.all(color: Colors.white),
-                                  borderRadius: BorderRadius.circular(12),
+                                  borderRadius: BorderRadius.circular(20),
                                 ),
-                                child: const Row(
-                                  mainAxisSize: MainAxisSize.max,
+                                child: Row(
                                   children: [
-                                    Padding(
-                                      padding: EdgeInsets.symmetric(
-                                          horizontal: 10.0),
-                                      child: SizedBox(
-                                        height: 30,
-                                        child: Icon(
-                                          Icons.search,
-                                          color: Color(0x9E1640D8),
-                                        ),
-                                      ),
-                                    ),
                                     SizedBox(
-                                      width: 250,
+                                      width: MediaQuery.of(context).size.width *
+                                          .9,
                                       child: TextField(
+                                        autofocus: false,
+                                        cursorColor: const Color(0xA11640D8),
                                         decoration: InputDecoration(
+                                          enabledBorder: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(15.0),
+                                            borderSide: const BorderSide(
+                                              color: Color.fromARGB(
+                                                  160, 93, 116, 202),
+                                            ),
+                                          ),
+                                          prefixIcon: const Padding(
+                                            padding: EdgeInsets.all(3),
+                                            child: Icon(
+                                              Icons.search,
+                                              color: Color(0x9E1640D8),
+                                            ),
+                                          ),
+                                          suffixIcon: Padding(
+                                            padding: const EdgeInsets.all(3),
+                                            child: Container(
+                                              decoration: BoxDecoration(
+                                                color: const Color(0x9E1640D8),
+                                                borderRadius:
+                                                    BorderRadius.circular(12),
+                                              ),
+                                              height: 40,
+                                              child: Image.asset(
+                                                'lib/assets/filter.png',
+                                                color: Colors.white,
+                                              ),
+                                            ),
+                                          ),
+                                          focusedBorder:
+                                              const OutlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                      color: Colors.blue)),
                                           hintText: 'Rechercher',
-                                          hintStyle: TextStyle(
+                                          hintStyle: const TextStyle(
                                             color: Color(0x9E1640D8),
                                             letterSpacing: 1.2,
                                           ),
-                                          border: InputBorder.none,
+                                          //  border: InputBorder.none,
                                         ),
                                       ),
                                     ),
                                   ],
-                                ),
-                              ),
-                              const SizedBox(width: 10),
-                              Container(
-                                decoration: BoxDecoration(
-                                  color: const Color(0x9E1640D8),
-                                  borderRadius: BorderRadius.circular(12),
-                                ),
-                                height: 40,
-                                child: Image.asset(
-                                  'lib/assets/filter.png',
-                                  color: Colors.white,
                                 ),
                               ),
                             ],
@@ -170,15 +192,15 @@ class _HomeState extends State<Home> {
 
             //menu de navigation
             SizedBox(
-                height: 70.0,
+                height: MediaQuery.of(context).size.height * 0.1,
                 child: ListView(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.only(left: 0.0, bottom: 4.0),
                   scrollDirection: Axis.horizontal,
                   children: <Widget>[
                     //First menu BUTTON  :  TOUT
                     Container(
-                      padding: const EdgeInsets.only(left: 20, top: 20),
-                      width: 100,
+                      padding: const EdgeInsets.only(left: 10, top: 20),
+                      width: 110,
                       child: TextButton(
                         onPressed: () {
                           setState(() {
@@ -203,7 +225,7 @@ class _HomeState extends State<Home> {
                     //Second Menu button: MAISON
                     Container(
                       padding: const EdgeInsets.only(left: 20, top: 20),
-                      width: 100,
+                      width: 110,
                       child: TextButton(
                         onPressed: () {
                           setState(() {
@@ -229,7 +251,7 @@ class _HomeState extends State<Home> {
 
                     Container(
                       padding: const EdgeInsets.only(left: 20, top: 20),
-                      width: 100,
+                      width: 110,
                       child: TextButton(
                         onPressed: () {
                           setState(() {
@@ -255,7 +277,7 @@ class _HomeState extends State<Home> {
 
                     Container(
                       padding: const EdgeInsets.only(left: 20, top: 20),
-                      width: 100.0,
+                      width: 110.0,
                       child: TextButton(
                         onPressed: () {
                           setState(() {
@@ -283,7 +305,7 @@ class _HomeState extends State<Home> {
             //display Menu content
 
             SizedBox(
-              height: 600,
+              height: MediaQuery.of(context).size.height * .9,
               //width: 380,
               // color: Colors.blue,
               child: PageStorage(

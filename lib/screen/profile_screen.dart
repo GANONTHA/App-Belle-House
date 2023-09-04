@@ -1,5 +1,5 @@
+import 'package:bellehouse/screen/welcome/welcome_screen.dart';
 import 'package:bellehouse/services/auth/authProvider.dart';
-import 'package:bellehouse/services/auth/auth_service.dart';
 import 'package:bellehouse/utilities/dialogs/logout_dialog.dart';
 import 'package:bellehouse/utilities/home_page.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -17,8 +17,13 @@ class Profile extends StatefulWidget {
 class _ProfileState extends State<Profile> {
   //sign user out
   void signOut() async {
-    final authService = Provider.of<AuthService>(context, listen: false);
-    authService.signOut();
+    final authService = Provider.of<AuthProvider>(context, listen: false);
+    authService.userSignOut().then(
+          (value) => Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(builder: (context) => const WelcomePage()),
+              (route) => false),
+        );
   }
 
   @override

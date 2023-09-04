@@ -149,11 +149,49 @@ class AuthProvider extends ChangeNotifier {
     return downloadUrl;
   }
 
+//get user infos from firestore
+  Future getDataFromFireStore() async {
+    await _fireStore
+        .collection("users")
+        .doc(_firebaseAuth.currentUser!.uid)
+        .get()
+        .then((DocumentSnapshot snapshot) {
+      _userModel = UserModel(
+        email: snapshot['email'],
+        name: snapshot['name'],
+        bio: snapshot['bio'],
+        profilePicture: snapshot['profilePicture'],
+        createAt: snapshot['createAt'],
+        phoneNumber: snapshot['phoneNumber'],
+        uid: snapshot['uid'],
+      );
+      _uid = userModel!.uid;
+    });
+  }
+
   //storing data locally
   Future saveUserDataSharePreference() async {
     final SharedPreferences sharedPreferences =
         await SharedPreferences.getInstance();
     await sharedPreferences.setString(
         "user_model", jsonEncode(userModel?.toMap()));
+  }
+
+  Future getDataFromSP() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    String data = sharedPreferences.getString("user_model") ?? '';
+    _userModel = UserModel.fromMap(jsonDecode(data));
+    _uid = _userModel!.uid;
+    notifyListeners();
+  }
+
+  //user signOut
+  Future userSignOut() async {
+    //remove from localstorage and firestore
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    await _firebaseAuth.signOut();
+    _isSignedIn = false;
+    notifyListeners();
+    sharedPreferences.clear();
   }
 }

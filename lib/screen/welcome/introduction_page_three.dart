@@ -8,44 +8,47 @@ class IntroductionPageThree extends StatelessWidget {
     return SafeArea(
       top: true,
       child: Container(
-          color: const Color(0xFF6C63FF),
-          child: const Column(
-            //mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              Image(
-                image: AssetImage(
-                  "lib/assets/logo.png",
-                ),
-                height: 404.33,
-                width: 359,
+        height: MediaQuery.of(context).size.height,
+        color: const Color(0xFF6C63FF),
+        child: Column(
+          //mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            Image(
+              image: const AssetImage(
+                "lib/assets/logo.png",
               ),
-              SizedBox(
-                height: 30,
-              ),
-              Text(
-                "L'IMMOBILIER EN UN CLIC",
-                style: TextStyle(
-                    fontSize: 32,
-                    color: Colors.white,
+              height: MediaQuery.of(context).size.height * 0.4,
+              width: 359,
+            ),
+            const SizedBox(
+              height: 30,
+            ),
+            const Text(
+              "L'IMMOBILIER EN UN CLIC",
+              style: TextStyle(
+                  fontSize: 32,
+                  color: Colors.white,
+                  fontWeight: FontWeight.w400,
+                  fontFamily: 'PermanentMarker'),
+            ),
+            const SizedBox(
+              height: 30,
+            ),
+            SizedBox(
+                height: MediaQuery.of(context).size.height * .1,
+                width: 230,
+                child: const Text(
+                  'Notifications d\'annonce en temp reel ',
+                  style: TextStyle(
                     fontWeight: FontWeight.w400,
-                    fontFamily: 'PermanentMarker'),
-              ),
-              SizedBox(
-                height: 30,
-              ),
-              SizedBox(
-                  height: 200.0,
-                  width: 230,
-                  child: Text(
-                    'Notifications d\'annonce en temp reel ',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
-                      fontSize: 20,
-                    ),
-                  ))
-            ],
-          )),
+                    color: Colors.white,
+                    fontSize: 20,
+                  ),
+                  textAlign: TextAlign.center,
+                ))
+          ],
+        ),
+      ),
     );
   }
 }

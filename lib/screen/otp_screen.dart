@@ -1,6 +1,7 @@
 import 'package:bellehouse/services/auth/authProvider.dart';
 import 'package:bellehouse/utilities/Authentification/user_info_screen.dart';
 import 'package:bellehouse/utilities/dialogs/util_functions.dart';
+import 'package:bellehouse/utilities/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:pinput/pinput.dart';
@@ -171,6 +172,17 @@ class _OTPScreenState extends State<OTPScreen> {
       onSuccess: () {
         ap.checkExistingUser().then((value) {
           if (value == true) {
+            ap.getDataFromFireStore().then(
+                  (value) => ap
+                      .saveUserDataSharePreference()
+                      .then((value) => ap.setSignIn().then(
+                            (value) => Navigator.pushAndRemoveUntil(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const MyHomePage()),
+                                (route) => false),
+                          )),
+                );
           } else {
             Navigator.pushAndRemoveUntil(
                 context,

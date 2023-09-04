@@ -1,6 +1,4 @@
-import 'package:bellehouse/components/my_text_field.dart';
 import 'package:bellehouse/services/auth/authProvider.dart';
-import 'package:bellehouse/services/auth/auth_service.dart';
 import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -8,12 +6,9 @@ import 'package:provider/provider.dart';
 import '../../components/my_Button.dart';
 
 class RegisterPage extends StatefulWidget {
-  final void Function()? onTap;
-
   // ignore: prefer_const_constructors_in_immutables
   RegisterPage({
     super.key,
-    this.onTap,
   });
 
   @override
@@ -22,36 +17,10 @@ class RegisterPage extends StatefulWidget {
 
 class _RegisterPageState extends State<RegisterPage> {
   //text controller
-  final emaiController = TextEditingController();
+
   final phoneController = TextEditingController();
-  final passwordControler = TextEditingController();
-  final nameController = TextEditingController();
 
   final confirmPasswordController = TextEditingController();
-
-  //method
-  void singUp() async {
-    if (passwordControler.text != confirmPasswordController.text) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text("Password don't match"),
-        ),
-      );
-      return;
-    }
-    //get the auth service
-    final authService = Provider.of<AuthService>(context, listen: false);
-    try {
-      await authService.signUpWithEmailAndPassword(emaiController.text,
-          passwordControler.text, nameController.text, phoneController.text);
-    } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(e.toString()),
-        ),
-      );
-    }
-  }
 
 //handle error
   handleError(PlatformException error) {
@@ -77,70 +46,42 @@ class _RegisterPageState extends State<RegisterPage> {
       backgroundColor: const Color(0xAB6C63FF),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 25.0),
+          padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 25.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               //logo
-              Image.asset(
-                'lib/assets/logo.png',
-                width: 300,
-                height: 300,
-                color: Colors.blueAccent,
+              Padding(
+                padding: const EdgeInsets.only(top: 25.0, bottom: 20.0),
+                child: Container(
+                  height: 200,
+                  width: 200,
+                  decoration: const BoxDecoration(
+                      color: Color(0xFF6C63FF),
+                      shape: BoxShape.circle,
+                      image: DecorationImage(
+                        image: AssetImage(
+                          'lib/assets/logo.png',
+                          //color: Colors.blueAccent,
+                        ),
+                      )),
+                ),
               ),
+
               //text
               const Center(
                 child: Text(
-                  'Creer votre compte',
+                  'Entrer votre numero de telephone pour creer votre compte',
                   style: TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
                     letterSpacing: 1.2,
                   ),
+                  textAlign: TextAlign.center,
                 ),
               ),
+              const SizedBox(height: 25.0),
 
-              const SizedBox(
-                height: 10.0,
-              ),
-              //name text field
-              MyTextField(
-                hintText: 'Entrer votre Nom et Prenom',
-                obscureText: false,
-                controller: nameController,
-                focus: true,
-              ),
-              const SizedBox(
-                height: 10.0,
-              ),
-
-              //passowrd field
-              MyTextField(
-                hintText: 'Entrer un mot de passe',
-                obscureText: true,
-                controller: passwordControler,
-                focus: false,
-              ),
-              const SizedBox(
-                height: 10.0,
-              ),
-              //confirm password field
-              MyTextField(
-                hintText: 'confirmer le mot de passe',
-                obscureText: true,
-                controller: confirmPasswordController,
-                focus: false,
-              ),
-              const SizedBox(
-                height: 10.0,
-              ),
-              //email  field
-              MyTextField(
-                hintText: 'Entrer votre addresse email',
-                obscureText: false,
-                controller: emaiController,
-                focus: false,
-              ),
               const SizedBox(
                 height: 10.0,
               ),
@@ -191,29 +132,13 @@ class _RegisterPageState extends State<RegisterPage> {
               const SizedBox(
                 height: 20,
               ),
-              //old user? login
 
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Text(
-                    'Avez vous un compte?',
-                  ),
-                  const SizedBox(
-                    width: 8.0,
-                  ),
-                  GestureDetector(
-                      onTap: widget.onTap,
-                      child: const Text(
-                        'Connecter a votre compte',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                          letterSpacing: 1.2,
-                        ),
-                      )),
-                ],
-              ),
+              const Text(
+                "Notre application vous offre une experience impeccable",
+                style:
+                    TextStyle(color: Colors.white, fontWeight: FontWeight.w300),
+                textAlign: TextAlign.center,
+              )
             ],
           ),
         ),

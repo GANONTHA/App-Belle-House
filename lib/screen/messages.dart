@@ -52,9 +52,9 @@ class _MessageState extends State<Message> {
 //build individual user list items
   Widget _buildUserListItem(DocumentSnapshot document) {
     Map<String, dynamic> data = document.data()! as Map<String, dynamic>;
-
+    final currentUserEmail = _auth.currentUser?.email;
     //diaplay all users except current user
-    if (_auth.currentUser!.email != data['email']) {
+    if (currentUserEmail != data['email']) {
       return ListTile(
         title: Container(
           height: 40,

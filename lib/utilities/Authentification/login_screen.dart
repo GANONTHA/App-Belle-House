@@ -6,8 +6,9 @@ import 'package:provider/provider.dart';
 import '../../services/auth/auth_service.dart';
 
 class LoginPage extends StatefulWidget {
-  final void Function()? onTap;
-  const LoginPage({super.key, required this.onTap});
+  const LoginPage({
+    super.key,
+  });
 
   @override
   State<LoginPage> createState() => _LoginPageState();
@@ -121,7 +122,6 @@ class _LoginPageState extends State<LoginPage> {
                     width: 8.0,
                   ),
                   GestureDetector(
-                    onTap: widget.onTap,
                     child: const Text(
                       'Creer votre compte',
                       style: TextStyle(

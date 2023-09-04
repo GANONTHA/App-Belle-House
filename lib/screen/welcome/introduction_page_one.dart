@@ -8,21 +8,22 @@ class IntroductionPageOne extends StatelessWidget {
     return SafeArea(
       top: true,
       child: Container(
+          height: MediaQuery.of(context).size.height,
           color: const Color(0xFF6C63FF),
-          child: const Column(
+          child: Column(
             //mainAxisAlignment: MainAxisAlignment.end,
             children: [
               Image(
-                image: AssetImage(
+                image: const AssetImage(
                   "lib/assets/logo.png",
                 ),
-                height: 404.33,
+                height: MediaQuery.of(context).size.height * 0.4,
                 width: 359,
               ),
-              SizedBox(
+              const SizedBox(
                 height: 30,
               ),
-              Text(
+              const Text(
                 "L'IMMOBILIER EN UN CLIC",
                 style: TextStyle(
                     fontSize: 32,
@@ -30,19 +31,20 @@ class IntroductionPageOne extends StatelessWidget {
                     fontWeight: FontWeight.w400,
                     fontFamily: 'PermanentMarker'),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 30,
               ),
               SizedBox(
-                  height: 200.0,
+                  height: MediaQuery.of(context).size.height * .1,
                   width: 230,
-                  child: Text(
+                  child: const Text(
                     'Trouver une maison qui vous convient sans vous deplacer',
                     style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
+                      fontWeight: FontWeight.w400,
+                      color: Colors.white,
                       fontSize: 20,
                     ),
+                    textAlign: TextAlign.center,
                   ))
             ],
           )),

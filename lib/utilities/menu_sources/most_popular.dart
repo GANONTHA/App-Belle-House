@@ -43,6 +43,10 @@ class Popular extends StatelessWidget {
           Container(
             height: 200.0,
             decoration: BoxDecoration(
+                borderRadius: const BorderRadius.only(
+                  topLeft: Radius.circular(6.0),
+                  topRight: Radius.circular(6.0),
+                ),
                 image: DecorationImage(
                     image: AssetImage(postImage), fit: BoxFit.fill)),
           ),

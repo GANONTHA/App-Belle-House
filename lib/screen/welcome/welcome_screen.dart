@@ -46,7 +46,10 @@ class _WelcomePageState extends State<WelcomePage> {
             children: [
               //Skip
               GestureDetector(
-                  child: const Text('Ignorer'),
+                  child: const Text(
+                    'Ignorer',
+                    style: TextStyle(color: Colors.white),
+                  ),
                   onTap: () {
                     _controller.jumpToPage(2);
                   }),
@@ -54,18 +57,25 @@ class _WelcomePageState extends State<WelcomePage> {
               SmoothPageIndicator(
                 controller: _controller,
                 count: 3,
+                effect: const WormEffect(
+                    dotColor: Colors.grey,
+                    activeDotColor: Colors.white,
+                    dotHeight: 10,
+                    dotWidth: 10),
               ),
               //Next or Done
               onLastPage
                   ? GestureDetector(
-                      onTap: () {
+                      onTap: () async {
                         if (ap.isSignedIn == true) {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const MyHomePage(),
-                            ),
-                          );
+                          await ap.getDataFromSP().whenComplete(
+                                () => Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => const MyHomePage(),
+                                  ),
+                                ),
+                              );
                         } else {
                           Navigator.pushReplacement(
                             context,
@@ -75,7 +85,10 @@ class _WelcomePageState extends State<WelcomePage> {
                           );
                         }
                       },
-                      child: const Text('Terminer'),
+                      child: const Text(
+                        'Terminer',
+                        style: TextStyle(color: Colors.white),
+                      ),
                     )
                   : GestureDetector(
                       onTap: () {
@@ -83,7 +96,19 @@ class _WelcomePageState extends State<WelcomePage> {
                             duration: const Duration(microseconds: 500),
                             curve: Curves.easeIn);
                       },
-                      child: const Text('Suivant'),
+                      child: const Row(
+                        children: [
+                          Text(
+                            'Suivant',
+                            style: TextStyle(color: Colors.white),
+                          ),
+                          Icon(
+                            Icons.navigate_next_sharp,
+                            color: Colors.white,
+                            size: 17.0,
+                          ),
+                        ],
+                      ),
                     )
             ],
           ),

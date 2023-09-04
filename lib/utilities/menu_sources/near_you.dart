@@ -22,12 +22,13 @@ class Near extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 5.0, vertical: 6.0),
+      padding: const EdgeInsets.only(left: 5.0, right: 5.0, bottom: 5.0),
       child: Row(
         mainAxisSize: MainAxisSize.max,
         children: [
           Expanded(
             child: Container(
+              height: MediaQuery.of(context).size.height,
               decoration: BoxDecoration(
                 image: DecorationImage(
                   image: AssetImage(postImage),
@@ -35,7 +36,7 @@ class Near extends StatelessWidget {
                 ),
                 borderRadius: const BorderRadius.only(
                   topLeft: Radius.circular(8.0),
-                  topRight: Radius.circular(8.0),
+                  bottomLeft: Radius.circular(8.0),
                 ),
               ),
             ),
