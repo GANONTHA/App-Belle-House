@@ -1,6 +1,6 @@
 import 'package:bellehouse/components/chat_bubble.dart';
 import 'package:bellehouse/services/chat/chat_services.dart';
-import 'package:bellehouse/utilities/dialogs/util_functions.dart';
+import 'package:bellehouse/utilities/util_functions.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';

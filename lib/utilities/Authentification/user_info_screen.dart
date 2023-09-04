@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:bellehouse/model/user_model.dart';
 import 'package:bellehouse/services/auth/authProvider.dart';
-import 'package:bellehouse/utilities/dialogs/util_functions.dart';
+import 'package:bellehouse/utilities/util_functions.dart';
 import 'package:bellehouse/utilities/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

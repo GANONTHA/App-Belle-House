@@ -1,6 +1,6 @@
 import 'package:bellehouse/services/auth/authProvider.dart';
 import 'package:bellehouse/utilities/Authentification/user_info_screen.dart';
-import 'package:bellehouse/utilities/dialogs/util_functions.dart';
+import 'package:bellehouse/utilities/util_functions.dart';
 import 'package:bellehouse/utilities/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';

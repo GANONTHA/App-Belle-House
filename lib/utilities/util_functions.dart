@@ -33,7 +33,7 @@ String displayDateTime(DateTime date) {
   final String formattedDate = formatter.format(date);
   final String formattedNow = formatter.format(now);
   final String formattedYesterday =
-      formatter.format(now.subtract(Duration(days: 1)));
+      formatter.format(now.subtract(const Duration(days: 1)));
   if (formattedDate == formattedNow) {
     return 'today at ${DateFormat.Hm().format(date)}';
   } else if (formattedDate == formattedYesterday) {

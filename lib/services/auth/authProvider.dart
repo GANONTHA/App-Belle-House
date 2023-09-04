@@ -4,7 +4,7 @@ import 'dart:io';
 
 import 'package:bellehouse/model/user_model.dart';
 import 'package:bellehouse/screen/otp_screen.dart';
-import 'package:bellehouse/utilities/dialogs/util_functions.dart';
+import 'package:bellehouse/utilities/util_functions.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';

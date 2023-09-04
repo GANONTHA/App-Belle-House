@@ -38,7 +38,7 @@ class _MessageState extends State<Message> {
         }
 
         return SizedBox(
-          height: 100,
+          height: MediaQuery.of(context).size.height,
           child: ListView(
             children: snapshot.data!.docs
                 .map<Widget>((doc) => _buildUserListItem(doc))
@@ -57,16 +57,24 @@ class _MessageState extends State<Message> {
     if (_firebaseAuth.currentUser?.uid != data['uid']) {
       return ListTile(
         title: Container(
-          height: 40,
+          height: 50,
           color: Colors.grey.shade300,
           child: Padding(
-            padding: const EdgeInsets.only(left: 8.0, top: 8.0),
-            child: Text(
-              data['name'],
-              style: const TextStyle(
-                  fontWeight: FontWeight.bold, letterSpacing: 1.3),
-            ),
-          ),
+              padding: const EdgeInsets.only(left: 8.0, top: 8.0, bottom: 8.0),
+              child: Row(
+                children: [
+                  CircleAvatar(
+                    foregroundImage: NetworkImage(data['profilePicture']),
+                  ),
+                  Text(data['name'])
+                ],
+              )
+              //  Text(
+              //   data['name'],
+              //   style: const TextStyle(
+              //       fontWeight: FontWeight.bold, letterSpacing: 1.3),
+              // ),
+              ),
         ),
         onTap: () {
           //pass the clicked user's UID to the chat page
