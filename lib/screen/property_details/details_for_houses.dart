@@ -1,8 +1,13 @@
+import 'dart:io';
+
 import 'package:bellehouse/controller/functions/convert_time_to_ago.dart';
 import 'package:bellehouse/model/houses_class.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:share_plus/share_plus.dart';
+import 'package:http/http.dart' as http;
 
 // ignore: must_be_immutable
 class HousesDetails extends StatelessWidget {
@@ -44,7 +49,19 @@ class HousesDetails extends StatelessWidget {
           elevation: 0,
           actions: [
             IconButton(
-              onPressed: () {},
+              onPressed: () async {
+                const imageUrl =
+                    'https://drive.google.com/file/d/1jmYDs5JIswAt7E14ekmyW3d6Hr_Hbe6c/view?usp=drive_link';
+                final uri = Uri.parse(imageUrl);
+                final response = await http.get(uri);
+                final bytes = response.bodyBytes;
+                final temp = await getTemporaryDirectory();
+                final path = '${temp.path}/image.jpg';
+                File(path).writeAsBytesSync(bytes);
+                // ignore: deprecated_member_use
+                await Share.shareFiles([path],
+                    text: 'image partge avec succes');
+              },
               icon: const Icon(
                 Icons.share,
                 color: Color(0xFF6C63FF),

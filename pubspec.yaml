@@ -53,6 +53,9 @@ dependencies:
   pinput: ^3.0.1
   flutter_custom_buttons: ^0.0.3
   image_picker: ^1.0.4
+  share_plus: ^7.1.0
+  http: ^0.13.6
+  path_provider: ^2.1.1
 
 dev_dependencies:
   flutter_test:

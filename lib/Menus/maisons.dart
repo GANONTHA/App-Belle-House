@@ -14,7 +14,7 @@ class Maison extends StatefulWidget {
 class _MaisonState extends State<Maison> {
   //grab the instance of the property
   final PropertyService _propertyService = PropertyService();
-
+  bool isLiked = false;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -136,9 +136,16 @@ class _MaisonState extends State<Maison> {
                                 fontWeight: FontWeight.bold,
                                 color: Color(0xFF6C63FF)),
                           ),
-                          const Icon(
-                            Icons.favorite,
-                            color: Color(0xFF6C63FF),
+                          IconButton(
+                            onPressed: () {
+                              setState(() {
+                                isLiked = true;
+                              });
+                            },
+                            icon: const Icon(Icons.favorite),
+                            color: isLiked == true
+                                ? const Color(0xFF6C63FF)
+                                : const Color.fromARGB(0, 240, 237, 237),
                           ),
                         ],
                       ),
