@@ -192,7 +192,7 @@ class _HomeState extends State<Home> {
 
             //menu de navigation
             SizedBox(
-                height: MediaQuery.of(context).size.height * 0.1,
+                height: 60,
                 child: ListView(
                   padding: const EdgeInsets.only(left: 0.0, bottom: 4.0),
                   scrollDirection: Axis.horizontal,
@@ -200,7 +200,7 @@ class _HomeState extends State<Home> {
                     //First menu BUTTON  :  TOUT
                     Container(
                       padding: const EdgeInsets.only(left: 10, top: 20),
-                      width: 110,
+                      width: 100,
                       child: TextButton(
                         onPressed: () {
                           setState(() {
@@ -225,7 +225,7 @@ class _HomeState extends State<Home> {
                     //Second Menu button: MAISON
                     Container(
                       padding: const EdgeInsets.only(left: 20, top: 20),
-                      width: 110,
+                      width: 100,
                       child: TextButton(
                         onPressed: () {
                           setState(() {
@@ -251,7 +251,7 @@ class _HomeState extends State<Home> {
 
                     Container(
                       padding: const EdgeInsets.only(left: 20, top: 20),
-                      width: 110,
+                      width: 100,
                       child: TextButton(
                         onPressed: () {
                           setState(() {
@@ -277,7 +277,7 @@ class _HomeState extends State<Home> {
 
                     Container(
                       padding: const EdgeInsets.only(left: 20, top: 20),
-                      width: 110.0,
+                      width: 100.0,
                       child: TextButton(
                         onPressed: () {
                           setState(() {

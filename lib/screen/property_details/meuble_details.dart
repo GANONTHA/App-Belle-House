@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:bellehouse/controller/functions/convert_time_to_ago.dart';
 import 'package:bellehouse/model/meuble_class.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -55,150 +54,211 @@ class MeubleDetails extends StatelessWidget {
         backgroundColor: Colors.white,
         elevation: 0,
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(children: [
-          //image
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Container(
-              height: 250,
-              width: MediaQuery.of(context).size.width,
-              decoration: BoxDecoration(
-                  borderRadius: const BorderRadius.all(Radius.circular(9.0)),
-                  shape: BoxShape.rectangle,
-                  image: DecorationImage(
-                    fit: BoxFit.fill,
-                    image: AssetImage(meuble.meubleImage),
-                  )),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(children: [
+            //image
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Container(
+                height: 230,
+                width: MediaQuery.of(context).size.width,
+                decoration: BoxDecoration(
+                    borderRadius: const BorderRadius.all(Radius.circular(9.0)),
+                    shape: BoxShape.rectangle,
+                    image: DecorationImage(
+                      fit: BoxFit.fill,
+                      image: AssetImage(meuble.meubleImage),
+                    )),
+              ),
             ),
-          ),
 
-          //name
-          Text(
-            meuble.meubleName,
-            style: const TextStyle(
-                fontWeight: FontWeight.bold, letterSpacing: 1.2),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(left: 5.0, right: 5.0, top: 5.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Text("Taille: 2.3 m"),
-                Text("Publie il y a $time")
-              ],
+            //name
+            Text(
+              meuble.meubleName,
+              style: const TextStyle(
+                  fontWeight: FontWeight.bold, letterSpacing: 1.2),
             ),
-          ),
-          const SizedBox(height: 20),
-          //size
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Text(
-                'Description',
-                style: TextStyle(fontWeight: FontWeight.bold),
+            Padding(
+              padding: const EdgeInsets.only(left: 5.0, right: 5.0, top: 5.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Text("Taille: 2.3 m"),
+                  Text("Publie il y a $time")
+                ],
               ),
-              const SizedBox(
-                height: 5.0,
-              ),
-              Text(meuble.description),
-            ],
-          ),
-          const SizedBox(height: 25),
-          //description
-          Padding(
-            padding: const EdgeInsets.only(left: 5.0),
-            child: Column(
+            ),
+            const SizedBox(height: 20),
+            //size
+            Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const Text(
-                  "Plus d'images",
+                  'Description',
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
-                const SizedBox(height: 25),
-                Row(
-                  children: [
-                    Container(
-                      height: 70,
-                      width: 70,
-                      decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          image: DecorationImage(
-                            fit: BoxFit.fill,
-                            image: AssetImage(meuble.meubleImage),
-                          )),
-                    ),
-                    const SizedBox(width: 20),
-                    Container(
-                      height: 70,
-                      width: 70,
-                      decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          image: DecorationImage(
-                            fit: BoxFit.fill,
-                            image: AssetImage(meuble.meubleImage),
-                          )),
-                    ),
-                    const SizedBox(width: 20),
-                    Container(
-                      height: 70,
-                      width: 70,
-                      decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          image: DecorationImage(
-                            fit: BoxFit.fill,
-                            image: AssetImage(meuble.meubleImage),
-                          )),
-                    ),
-                    const SizedBox(width: 20),
-                    Container(
-                      height: 70,
-                      width: 70,
-                      decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          image: DecorationImage(
-                            fit: BoxFit.fill,
-                            image: AssetImage(meuble.meubleImage),
-                          )),
-                    ),
-                  ],
-                )
-              ],
-            ),
-          ),
-          const SizedBox(height: 25),
-          Padding(
-            padding: const EdgeInsets.only(left: 5.0, right: 5.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text(
-                      "Prix",
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                    Text(
-                      "${meuble.price.toString()} FCFA",
-                      style: const TextStyle(fontWeight: FontWeight.bold),
-                    )
-                  ],
+                const SizedBox(
+                  height: 5.0,
                 ),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFF6C63FF)),
-                  onPressed: () {},
-                  child: const Text(
-                    "Acheter",
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                  ),
-                )
+                Text(meuble.description),
               ],
             ),
-          )
-        ]),
+            const SizedBox(height: 25),
+            //description
+            Padding(
+              padding: const EdgeInsets.only(left: 5.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    "Plus d'images",
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  const SizedBox(height: 25),
+                  SizedBox(
+                    height: 100,
+                    child: ListView(
+                      scrollDirection: Axis.horizontal,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(left: 5.0, top: 8.0),
+                          child: Container(
+                            height: 100,
+                            width: 150,
+                            decoration: BoxDecoration(
+                              borderRadius:
+                                  const BorderRadius.all(Radius.circular(5.0)),
+                              shape: BoxShape.rectangle,
+                              image: DecorationImage(
+                                fit: BoxFit.fill,
+                                image: AssetImage(meuble.meubleImage),
+                              ),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(width: 10.0),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 5.0, top: 8.0),
+                          child: Container(
+                            height: 100,
+                            width: 150,
+                            decoration: BoxDecoration(
+                              borderRadius:
+                                  const BorderRadius.all(Radius.circular(5.0)),
+                              shape: BoxShape.rectangle,
+                              image: DecorationImage(
+                                fit: BoxFit.fill,
+                                image: AssetImage(meuble.meubleImage),
+                              ),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(width: 10.0),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 5.0, top: 8.0),
+                          child: Container(
+                            height: 100,
+                            width: 150,
+                            decoration: BoxDecoration(
+                              borderRadius:
+                                  const BorderRadius.all(Radius.circular(5.0)),
+                              shape: BoxShape.rectangle,
+                              image: DecorationImage(
+                                fit: BoxFit.fill,
+                                image: AssetImage(meuble.meubleImage),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  // Row(
+                  //   children: [
+                  //     Container(
+                  //       height: 70,
+                  //       width: 70,
+                  //       decoration: BoxDecoration(
+                  //           shape: BoxShape.circle,
+                  //           image: DecorationImage(
+                  //             fit: BoxFit.fill,
+                  //             image: AssetImage(meuble.meubleImage),
+                  //           )),
+                  //     ),
+                  //     const SizedBox(width: 20),
+                  //     Container(
+                  //       height: 70,
+                  //       width: 70,
+                  //       decoration: BoxDecoration(
+                  //           shape: BoxShape.circle,
+                  //           image: DecorationImage(
+                  //             fit: BoxFit.fill,
+                  //             image: AssetImage(meuble.meubleImage),
+                  //           )),
+                  //     ),
+                  //     const SizedBox(width: 20),
+                  //     Container(
+                  //       height: 70,
+                  //       width: 70,
+                  //       decoration: BoxDecoration(
+                  //           shape: BoxShape.circle,
+                  //           image: DecorationImage(
+                  //             fit: BoxFit.fill,
+                  //             image: AssetImage(meuble.meubleImage),
+                  //           )),
+                  //     ),
+                  //     const SizedBox(width: 20),
+                  //     Container(
+                  //       height: 70,
+                  //       width: 70,
+                  //       decoration: BoxDecoration(
+                  //           shape: BoxShape.circle,
+                  //           image: DecorationImage(
+                  //             fit: BoxFit.fill,
+                  //             image: AssetImage(meuble.meubleImage),
+                  //           )),
+                  //     ),
+                  //   ],
+                  // )
+                ],
+              ),
+            ),
+            const SizedBox(height: 25),
+            Padding(
+              padding: const EdgeInsets.only(left: 5.0, right: 5.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        "Prix",
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      Text(
+                        "${meuble.price.toString()} FCFA",
+                        style: const TextStyle(fontWeight: FontWeight.bold),
+                      )
+                    ],
+                  ),
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color(0xFF6C63FF)),
+                    onPressed: () {},
+                    child: const Text(
+                      "Acheter",
+                      style:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    ),
+                  )
+                ],
+              ),
+            )
+          ]),
+        ),
       ),
     );
   }

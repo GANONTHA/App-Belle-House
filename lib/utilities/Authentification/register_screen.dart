@@ -108,7 +108,8 @@ class _RegisterPageState extends State<RegisterPage> {
                         showCountryPicker(
                           context: context,
                           countryListTheme: const CountryListThemeData(
-                              bottomSheetHeight: 400),
+                            bottomSheetHeight: 400,
+                          ),
                           onSelect: (value) {
                             setState(() {
                               country = value;

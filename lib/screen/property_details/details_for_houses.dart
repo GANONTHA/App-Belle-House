@@ -12,12 +12,7 @@ import 'package:http/http.dart' as http;
 // ignore: must_be_immutable
 class HousesDetails extends StatelessWidget {
   final Property property;
-  HousesDetails({required this.property, super.key});
-
-  //grab instance of the property
-  List<bool> likes = [false, true];
-
-  bool isLiked = false;
+  const HousesDetails({required this.property, super.key});
 
   @override
   Widget build(BuildContext context) {

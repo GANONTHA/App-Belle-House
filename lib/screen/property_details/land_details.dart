@@ -163,11 +163,13 @@ class LandDetails extends StatelessWidget {
                       height: 100,
                       width: 150,
                       decoration: BoxDecoration(
-                          borderRadius:
-                              const BorderRadius.all(Radius.circular(5.0)),
-                          shape: BoxShape.rectangle,
-                          image: DecorationImage(
-                              image: AssetImage(land.landImage))),
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(5.0)),
+                        shape: BoxShape.rectangle,
+                        image: DecorationImage(
+                          image: AssetImage(land.landImage),
+                        ),
+                      ),
                     ),
                   ),
                   Padding(
@@ -176,11 +178,13 @@ class LandDetails extends StatelessWidget {
                       height: 100,
                       width: 150,
                       decoration: BoxDecoration(
-                          borderRadius:
-                              const BorderRadius.all(Radius.circular(5.0)),
-                          shape: BoxShape.rectangle,
-                          image: DecorationImage(
-                              image: AssetImage(land.landImage))),
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(5.0)),
+                        shape: BoxShape.rectangle,
+                        image: DecorationImage(
+                          image: AssetImage(land.landImage),
+                        ),
+                      ),
                     ),
                   ),
                 ],

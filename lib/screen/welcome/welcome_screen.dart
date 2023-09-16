@@ -58,10 +58,11 @@ class _WelcomePageState extends State<WelcomePage> {
                 controller: _controller,
                 count: 3,
                 effect: const WormEffect(
-                    dotColor: Colors.grey,
-                    activeDotColor: Colors.white,
-                    dotHeight: 10,
-                    dotWidth: 10),
+                  dotColor: Colors.grey,
+                  activeDotColor: Colors.white,
+                  dotHeight: 10,
+                  dotWidth: 10,
+                ),
               ),
               //Next or Done
               onLastPage

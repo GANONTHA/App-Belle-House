@@ -105,9 +105,11 @@ class _UserInformationScreenState extends State<UserInformationScreen> {
                               const SizedBox(height: 20.0),
                               Container(
                                 decoration: const BoxDecoration(
-                                    color: Color(0xFF6C63FF),
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(20))),
+                                  color: Color(0xFF6C63FF),
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(20),
+                                  ),
+                                ),
                                 height: 50,
                                 width: MediaQuery.of(context).size.width * 0.90,
                                 child: TextButton(
@@ -154,10 +156,11 @@ class _UserInformationScreenState extends State<UserInformationScreen> {
           prefixIcon: Container(
             margin: const EdgeInsets.all(8.0),
             decoration: const BoxDecoration(
-                borderRadius: BorderRadius.all(
-                  Radius.circular(8.0),
-                ),
-                color: Color(0xFF6C63FF)),
+              borderRadius: BorderRadius.all(
+                Radius.circular(8.0),
+              ),
+              color: Color(0xFF6C63FF),
+            ),
             child: Icon(
               icon,
               size: 20,
